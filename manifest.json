@@ -6,6 +6,6 @@
 	"description": "Create a simple dashboard of embedded markdown and codeblocks using a grid based view",
 	"author": "Trey Wallis",
 	"authorUrl": "https://github.com/trey-wallis",
-	"isDesktopOnly": false,
+	"isDesktopOnly": true,
 	"fundingUrl": "https://www.buymeacoffee.com/treywallis"
 }
