@@ -1,10 +1,11 @@
-import { Notice, Plugin, TFolder } from "obsidian";
+import { Plugin, TFolder } from "obsidian";
 import {
 	CURRENT_PLUGIN_VERSION,
 	DASHBOARDS_VIEW,
-	FILE_EXTENSION,
+	DASHBOARD_FILE_EXTENSION,
 } from "./data/constants";
 import DashboardsView from "./obsidian/dashboards-view";
+import { createDashboardFile } from "./data/create-dashboard-file";
 
 interface DashboardsSettings {
 	pluginVersion: string;
@@ -21,7 +22,7 @@ export default class DashboardsPlugin extends Plugin {
 		await this.loadSettings();
 
 		this.registerView(DASHBOARDS_VIEW, (leaf) => new DashboardsView(leaf));
-		this.registerExtensions([FILE_EXTENSION], DASHBOARDS_VIEW);
+		this.registerExtensions([DASHBOARD_FILE_EXTENSION], DASHBOARDS_VIEW);
 
 		this.addRibbonIcon("gauge", "Create new dashboard", async () => {
 			await this.newDashboardFile();
@@ -74,6 +75,6 @@ export default class DashboardsPlugin extends Plugin {
 	}
 
 	private newDashboardFile(path?: string) {
-		new Notice("Not implemented yet");
+		createDashboardFile({ folderPath: path });
 	}
 }

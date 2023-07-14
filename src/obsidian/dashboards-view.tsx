@@ -5,7 +5,7 @@ import { createRoot, Root } from "react-dom/client";
 import {
 	deserializeAppState,
 	serializeAppState,
-} from "src/data/serializeAppState";
+} from "src/data/serialize-app-state";
 import { DASHBOARDS_VIEW } from "src/data/constants";
 
 export default class DashboardsView extends TextFileView {
