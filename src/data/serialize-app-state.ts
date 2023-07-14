@@ -1,4 +1,4 @@
-import { AppState } from "src/data/types";
+import { AppState } from "src/shared/types";
 import { CURRENT_PLUGIN_VERSION } from "./constants";
 
 export const deserializeAppState = (data: string) => {
