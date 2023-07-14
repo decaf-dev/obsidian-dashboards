@@ -1,7 +1,7 @@
 import { Notice } from "obsidian";
-import { createFile, createFolder } from "./file-operations";
+import { createFile, createFolderIfNotExists } from "./file-operations";
 import { serializeAppState } from "./serialize-app-state";
-import { getDefaultDashboardFileName, getFilePath } from "./file-utils";
+import { getDashboardFilePath } from "./file-utils";
 import { createDefaultAppState } from "./app-state-factory";
 
 export const createDashboardFile = async (options?: {
@@ -9,17 +9,11 @@ export const createDashboardFile = async (options?: {
 }) => {
 	const { folderPath = "" } = options ?? {};
 	try {
-		//Create folder if it doesn't exist
-		if (folderPath !== "") {
-			if (app.vault.getAbstractFileByPath(folderPath) == null)
-				await createFolder(folderPath);
-		}
+		await createFolderIfNotExists(folderPath);
 
-		const fileName = getDefaultDashboardFileName();
 		const state = createDefaultAppState();
 		const serialized = serializeAppState(state);
-		const filePath = getFilePath(folderPath, fileName);
-
+		const filePath = getDashboardFilePath(folderPath);
 		return await createFile(filePath, serialized);
 	} catch (err) {
 		new Notice("Could not create dashboard file");

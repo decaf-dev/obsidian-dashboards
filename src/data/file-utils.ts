@@ -1,3 +1,4 @@
+import { normalizePath } from "obsidian";
 import {
 	DASHBOARD_FILE_EXTENSION,
 	DEFAULT_DASHBOARD_FILE_NAME,
@@ -17,11 +18,11 @@ export const splitFileExtension = (
 	return null;
 };
 
-export const getDefaultDashboardFileName = (): string => {
-	return `${DEFAULT_DASHBOARD_FILE_NAME}.${DASHBOARD_FILE_EXTENSION}`;
+const getDefaultDashboardFileName = (): string => {
+	return DEFAULT_DASHBOARD_FILE_NAME + "." + DASHBOARD_FILE_EXTENSION;
 };
 
-export const getFilePath = (folderPath: string, fileName: string) => {
-	if (folderPath === "") return fileName;
-	return folderPath + "/" + fileName;
+export const getDashboardFilePath = (folderPath: string) => {
+	const fileName = getDefaultDashboardFileName();
+	return normalizePath(folderPath + "/" + fileName);
 };
