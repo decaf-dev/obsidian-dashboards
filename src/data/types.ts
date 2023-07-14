@@ -1,6 +1,8 @@
 export interface Container {
+	id: string;
 	type: ContainerType;
 	position: number;
+	content: string;
 	isVisible: boolean;
 }
 
