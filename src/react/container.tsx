@@ -11,6 +11,8 @@ import {
 	renderMarkdown,
 } from "src/shared/render-utils";
 import { useMountState } from "./mount-provider";
+import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "src/shared/constants";
+import { TFile } from "obsidian";
 
 interface Props {
 	container?: Container;
@@ -19,17 +21,38 @@ interface Props {
 export default function Container({ container }: Props) {
 	const leaf = useMountState();
 
-	// <IconButton iconId="x" />;
 	const [isHovered, setHover] = React.useState(false);
+	const [isCtrlDown, setCtrlDown] = React.useState(false);
 
-	function handleCodeblockModalSave() {}
+	function handleCodeblockModalSave(value: string) {}
 
-	function handleLinkModalSave() {}
+	function handleLinkModalSave(value: string) {}
 
-	function handleFileModalSave() {}
+	function handleFileModalSave(value: TFile) {}
+
+	function handleRemoveClick() {}
 
 	if (leaf === null)
 		throw new Error("Container component must be mounted in a leaf");
+
+	React.useEffect(() => {
+		function handleCtrlDown() {
+			setCtrlDown(true);
+		}
+
+		function handleCtrlUp() {
+			setCtrlDown(false);
+		}
+
+		//@ts-expect-error Not native Obsidian event
+		app.workspace.on(EVENT_CTRL_DOWN, handleCtrlDown);
+		//@ts-expect-error Not native Obsidian event
+		app.workspace.on(EVENT_CTRL_UP, handleCtrlUp);
+		return () => {
+			app.workspace.off(EVENT_CTRL_DOWN, handleCtrlDown);
+			app.workspace.off(EVENT_CTRL_UP, handleCtrlUp);
+		};
+	}, []);
 
 	return (
 		<div
@@ -45,7 +68,7 @@ export default function Container({ container }: Props) {
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}
 		>
-			{!container ? (
+			{container === undefined && (
 				<>
 					<IconButton
 						tooltip="Add file"
@@ -72,7 +95,8 @@ export default function Container({ container }: Props) {
 						}
 					/>
 				</>
-			) : (
+			)}
+			{container !== undefined && (!isCtrlDown || !isHovered) && (
 				<div
 					ref={async (node) => {
 						const markdownDiv = await renderMarkdown(
@@ -82,6 +106,13 @@ export default function Container({ container }: Props) {
 						appendOrReplaceFirstChild(node, markdownDiv);
 					}}
 				></div>
+			)}
+			{container !== undefined && isCtrlDown && isHovered && (
+				<IconButton
+					tooltip="Remove"
+					iconId="x"
+					onClick={() => handleRemoveClick()}
+				/>
 			)}
 		</div>
 	);
