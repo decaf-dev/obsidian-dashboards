@@ -1,12 +1,12 @@
 import { TextFileView, WorkspaceLeaf } from "obsidian";
-import { AppState } from "src/data/types";
-import App from "src/react";
+import { AppState } from "src/shared/types";
 import { createRoot, Root } from "react-dom/client";
 import {
 	deserializeAppState,
 	serializeAppState,
 } from "src/data/serialize-app-state";
 import { DASHBOARDS_VIEW } from "src/data/constants";
+import Main from "src/react";
 
 export default class DashboardsView extends TextFileView {
 	private root: Root | null;
@@ -75,7 +75,8 @@ export default class DashboardsView extends TextFileView {
 	private renderApp(state: AppState) {
 		if (this.root) {
 			this.root.render(
-				<App
+				<Main
+					leaf={this.leaf}
 					initialState={state}
 					onStateChange={this.handleSaveLoomState}
 				/>
