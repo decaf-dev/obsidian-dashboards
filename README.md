@@ -15,7 +15,7 @@ Support development
 
 ## About
 
--   [Screenshots][#screenshots]
+-   [Screenshots](#screenshots)
 -   [Getting started](#getting-started)
 -   [License](#license)
 
