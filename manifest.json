@@ -3,7 +3,7 @@
 	"name": "Dashboards",
 	"version": "0.1.0",
 	"minAppVersion": "1.2.0",
-	"description": "Create a simple dashboard of embedded markdown and codeblocks using a grid based view",
+	"description": "Create a simple dashboard using a grid based view",
 	"author": "Trey Wallis",
 	"authorUrl": "https://github.com/trey-wallis",
 	"isDesktopOnly": true,
