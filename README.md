@@ -43,7 +43,7 @@ Embed any Obsidian codeblock using the [normal codeblock syntax](https://help.ob
 
 ### Links
 
-https://help.obsidian.md/Editing+and+formatting/Embedding+web+pages
+Any website will automatically be embedded in an iFrame
 
 ## License
 
