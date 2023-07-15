@@ -41,7 +41,12 @@ export default function Table({
 								(container) => container.position === position
 							);
 							return (
-								<td key={x}>
+								<td
+									key={x}
+									css={css`
+										width: ${100 / numContainersX}%;
+									`}
+								>
 									<Container
 										showBorders={showBorders}
 										container={container}
