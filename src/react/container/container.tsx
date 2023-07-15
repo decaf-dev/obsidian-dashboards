@@ -72,8 +72,17 @@ export default function Container({
 		};
 	}, []);
 
+	const [height, setHeight] = React.useState(0);
+	const ref = React.useRef<HTMLDivElement>(null);
+	React.useEffect(() => {
+		if (ref.current) {
+			setHeight(ref.current.clientHeight);
+		}
+	}, [ref.current]);
+
 	return (
 		<div
+			ref={ref}
 			css={css`
 				display: flex;
 				flex-direction: column;
@@ -98,6 +107,7 @@ export default function Container({
 			{container && (
 				<ContainerContent
 					isCtrlDown={isCtrlDown}
+					height={height}
 					isHovered={isHovered}
 					container={container}
 					numContainersY={numContainersY}
