@@ -5,6 +5,7 @@ import {
 	ContainerType,
 	LayoutOptions,
 } from "../shared/types";
+import { v4 as uuid } from "uuid";
 
 export const createDefaultAppState = (): AppState => {
 	return {
@@ -21,7 +22,7 @@ export const createContainer = (
 	content: string
 ): Container => {
 	return {
-		id: "",
+		id: uuid(),
 		position,
 		type,
 		content,
