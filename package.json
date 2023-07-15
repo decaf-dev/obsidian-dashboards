@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-dashboards",
 	"version": "0.1.0",
-	"description": "Create a simple dashboard of embedded markdown and codeblocks using a grid based view",
+	"description": "Create your own personalized dashboard using customizable grid views",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
