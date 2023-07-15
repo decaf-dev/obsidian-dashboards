@@ -8,6 +8,7 @@ interface Props {
 	container: Container;
 	isCtrlDown: boolean;
 	isHovered: boolean;
+	numContainersY: number;
 	onRemoveClick: () => void;
 }
 
@@ -15,6 +16,7 @@ export default function ContainerContent({
 	isCtrlDown,
 	isHovered,
 	container,
+	numContainersY,
 	onRemoveClick,
 }: Props) {
 	const leaf = useMountState();
@@ -36,7 +38,11 @@ export default function ContainerContent({
 					onClick={() => onRemoveClick()}
 				/>
 			)}
-			<RenderMarkdown leaf={leaf} markdown={markdown} />
+			<RenderMarkdown
+				leaf={leaf}
+				markdown={markdown}
+				numContainersY={numContainersY}
+			/>
 		</>
 	);
 }
