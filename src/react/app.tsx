@@ -25,6 +25,7 @@ export default function App({ initialState, onStateChange }: Props) {
 
 	return (
 		<div
+			className="Dashboards__app"
 			css={css`
 				display: flex;
 				flex-direction: column;

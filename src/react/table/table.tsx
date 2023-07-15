@@ -24,7 +24,7 @@ export default function Table({
 			css={css`
 				width: 100%;
 				height: 100%;
-				border-collapse: collapse;
+				border-spacing: 10px;
 			`}
 		>
 			<tbody>
@@ -41,11 +41,17 @@ export default function Table({
 								(container) => container.position === position
 							);
 							return (
-								<td key={x}>
+								<td
+									key={x}
+									css={css`
+										width: ${100 / numContainersX}%;
+									`}
+								>
 									<Container
 										showBorders={showBorders}
 										container={container}
 										position={position}
+										numContainersY={numContainersY}
 										onAddContainer={onAddContainer}
 										onRemoveContainer={onRemoveContainer}
 									/>
