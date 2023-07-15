@@ -29,7 +29,7 @@ TODO
 
 ### Codeblocks
 
-Embed any Obsidian codeblock using the [normal codeblock syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render Dataview, DataviewJS, or the Tasks plugin code blocks.
+Embed any Obsidian codeblock using the [normal codeblock syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render [Dataview](https://github.com/blacksmithgu/obsidian-dataview), DataviewJS, or [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) plugin code blocks.
 
 ### Links
 
