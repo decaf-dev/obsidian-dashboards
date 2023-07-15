@@ -2,7 +2,7 @@ import { App, Modal } from "obsidian";
 
 type SaveCallback = (value: string) => void;
 
-export default class LinkModal extends Modal {
+export default class CodeblockModal extends Modal {
 	inputEl?: HTMLTextAreaElement;
 	onSave: SaveCallback;
 
