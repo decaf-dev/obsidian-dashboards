@@ -15,6 +15,7 @@ Support development
 
 -   [Screenshots](#screenshots)
 -   [Getting started](#getting-started)
+-   [Embeddable Items](#embeddable-items)
 -   [License](#license)
 
 ## Screenshots
@@ -33,15 +34,25 @@ Use many different layouts
 
 ## Getting Started
 
-1. Create a new dashboard file
-2. Choose your layout in by using the dropdown in the upper righthand corner
-3. In each container, choose a vault file, a code block, or a external link to embed
+1. Create a new dashboard file by right clicking a folder and clicking "New dashboard" or click the Gauge icon on the left sidebar.
+2. Choose your grid layout using the dropdown in the upper righthand corner
+3. In each container click one of the embed buttons and enter the content you wish to embed. You may choose from a vault file, a code block, or a external link.
 
-### Code blocks
+### Removing an embed
+
+To remove an embed from a container, hold down ctrl (Windows) or cmd (Mac) and hover over a container to show the remove button. Then click the remove button
+
+### Embeddable Items
+
+## Files
+
+Any vault files may be embedded into a container
+
+## Code blocks
 
 Embed any Obsidian code block using the [normal code block syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render [Dataview](https://github.com/blacksmithgu/obsidian-dataview), DataviewJS, or [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) plugin code blocks.
 
-### Links
+## Links
 
 Any website will automatically be embedded in an iFrame
 
