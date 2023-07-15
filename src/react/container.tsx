@@ -1,28 +1,55 @@
 import { css } from "@emotion/react";
 
-import { Container } from "src/shared/types";
+import { Container, ContainerType } from "src/shared/types";
 import React from "react";
 import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "src/shared/constants";
 import { TFile } from "obsidian";
 import ContainerContent from "./container-content";
 import EmptyContainerContent from "./empty-container-content";
+import { createContainer } from "src/data/app-state-factory";
 
 interface Props {
 	container?: Container;
 	showBorders: boolean;
+	position: number;
+	onAddContainer: (value: Container) => void;
+	onRemoveContainer: (id: string) => void;
 }
 
-export default function Container({ container, showBorders }: Props) {
+export default function Container({
+	container,
+	position,
+	showBorders,
+	onAddContainer,
+	onRemoveContainer,
+}: Props) {
 	const [isHovered, setHover] = React.useState(false);
 	const [isCtrlDown, setCtrlDown] = React.useState(false);
 
-	function handleCodeblockModalSave(value: string) {}
+	function handleCodeblockModalSave(value: string) {
+		const container = createContainer(
+			ContainerType.CODEBLOCK,
+			position,
+			value
+		);
+		onAddContainer(container);
+	}
 
-	function handleLinkModalSave(value: string) {}
+	function handleLinkModalSave(value: string) {
+		const container = createContainer(ContainerType.LINK, position, value);
+		onAddContainer(container);
+	}
 
-	function handleFileModalSave(value: TFile) {}
-
-	function handleRemoveClick() {}
+	function handleFileModalSave(value: TFile) {
+		const container = createContainer(
+			ContainerType.FILE,
+			position,
+			value.path
+		);
+		//const resourcePath = app.vault.adapter.getResourcePath(value.path);
+		//app.metadataCache.getFirstLinkpathDest(href, view.file.path);
+		onAddContainer(container);
+	}
 
 	React.useEffect(() => {
 		function handleCtrlDown() {
@@ -71,7 +98,7 @@ export default function Container({ container, showBorders }: Props) {
 					container={container}
 					isHovered={isHovered}
 					isCtrlDown={isCtrlDown}
-					onRemoveClick={handleRemoveClick}
+					onRemoveClick={() => onRemoveContainer(container.id)}
 				/>
 			)}
 		</div>

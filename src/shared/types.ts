@@ -3,7 +3,6 @@ export interface Container {
 	type: ContainerType;
 	position: number;
 	content: string;
-	isVisible: boolean;
 }
 
 export enum ContainerType {

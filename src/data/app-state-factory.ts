@@ -17,13 +17,13 @@ export const createDefaultAppState = (): AppState => {
 
 export const createContainer = (
 	type: ContainerType,
+	position: number,
 	content: string
 ): Container => {
 	return {
 		id: "",
-		position: 0,
+		position,
 		type,
 		content,
-		isVisible: true,
 	};
 };

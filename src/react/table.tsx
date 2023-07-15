@@ -7,6 +7,8 @@ interface Props {
 	data: ContainerType[];
 	numContainersX: number;
 	numContainersY: number;
+	onAddContainer: (value: ContainerType) => void;
+	onRemoveContainer: (id: string) => void;
 }
 
 export default function Table({
@@ -14,6 +16,8 @@ export default function Table({
 	data,
 	numContainersX,
 	numContainersY,
+	onAddContainer,
+	onRemoveContainer,
 }: Props) {
 	return (
 		<table
@@ -41,6 +45,9 @@ export default function Table({
 									<Container
 										showBorders={showBorders}
 										container={container}
+										position={position}
+										onAddContainer={onAddContainer}
+										onRemoveContainer={onRemoveContainer}
 									/>
 								</td>
 							);

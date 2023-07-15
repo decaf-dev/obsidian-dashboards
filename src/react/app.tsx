@@ -56,6 +56,24 @@ export default function App({ initialState, onStateChange }: Props) {
 				showBorders={showBorders}
 				numContainersX={numContainersX}
 				numContainersY={numContainersY}
+				onAddContainer={(container) => {
+					setState((prevState) => {
+						return {
+							...prevState,
+							data: [...prevState.data, container],
+						};
+					});
+				}}
+				onRemoveContainer={(id) => {
+					setState((prevState) => {
+						return {
+							...prevState,
+							data: prevState.data.filter(
+								(container) => container.id !== id
+							),
+						};
+					});
+				}}
 			/>
 		</div>
 	);
