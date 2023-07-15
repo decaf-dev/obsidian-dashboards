@@ -2,16 +2,16 @@ import LinkModal from "src/obsidian/link-modal";
 import FileModal from "src/obsidian/file-modal";
 import IconButton from "../icon-button/icon-button";
 import { TFile } from "obsidian";
-import CodeblockModal from "src/obsidian/codeblock-modal";
+import CodeBlockModal from "src/obsidian/code-block-modal";
 
 interface Props {
-	onCodeblockModalSave: (value: string) => void;
+	onCodeBlockModalSave: (value: string) => void;
 	onLinkModalSave: (value: string) => void;
 	onFileModalSave: (value: TFile) => void;
 }
 
 export default function EmptyContainerContent({
-	onCodeblockModalSave,
+	onCodeBlockModalSave,
 	onLinkModalSave,
 	onFileModalSave,
 }: Props) {
@@ -23,10 +23,10 @@ export default function EmptyContainerContent({
 				onClick={() => new FileModal(app, onFileModalSave).open()}
 			/>
 			<IconButton
-				tooltip="Add codeblock"
+				tooltip="Add code block"
 				iconId="code"
 				onClick={() =>
-					new CodeblockModal(app, onCodeblockModalSave).open()
+					new CodeBlockModal(app, onCodeBlockModalSave).open()
 				}
 			/>
 			<IconButton

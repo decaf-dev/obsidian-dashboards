@@ -7,7 +7,7 @@ export const getMarkdownFromContainerContent = (
 	content: string
 ) => {
 	switch (type) {
-		case ContainerType.CODEBLOCK:
+		case ContainerType.CODE_BLOCK:
 			return content;
 		case ContainerType.FILE:
 			if (!content.endsWith(".md")) {

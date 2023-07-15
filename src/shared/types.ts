@@ -7,7 +7,7 @@ export interface Container {
 
 export enum ContainerType {
 	LINK = "link",
-	CODEBLOCK = "codeblock",
+	CODE_BLOCK = "code-block",
 	FILE = "file",
 }
 

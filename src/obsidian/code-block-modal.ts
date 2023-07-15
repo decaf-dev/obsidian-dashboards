@@ -2,7 +2,7 @@ import { App, Modal } from "obsidian";
 
 type SaveCallback = (value: string) => void;
 
-export default class CodeblockModal extends Modal {
+export default class CodeBlockModal extends Modal {
 	inputEl?: HTMLTextAreaElement;
 	onSave: SaveCallback;
 
@@ -13,7 +13,7 @@ export default class CodeblockModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
-		contentEl.createEl("h4", { text: "Add codeblock" });
+		contentEl.createEl("h4", { text: "Add code block" });
 
 		const containerEl = contentEl.createDiv();
 		containerEl.style.display = "flex";

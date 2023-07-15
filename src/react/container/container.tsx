@@ -28,9 +28,9 @@ export default function Container({
 	const [isCtrlDown, setCtrlDown] = React.useState(false);
 	const [isHovered, setHovered] = React.useState(false);
 
-	function handleCodeblockModalSave(value: string) {
+	function handleCodeBlockModalSave(value: string) {
 		const container = createContainer(
-			ContainerType.CODEBLOCK,
+			ContainerType.CODE_BLOCK,
 			position,
 			value
 		);
@@ -90,7 +90,7 @@ export default function Container({
 		>
 			{container === undefined && (
 				<EmptyContainerContent
-					onCodeblockModalSave={handleCodeblockModalSave}
+					onCodeBlockModalSave={handleCodeBlockModalSave}
 					onLinkModalSave={handleLinkModalSave}
 					onFileModalSave={handleFileModalSave}
 				/>
