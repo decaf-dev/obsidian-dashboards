@@ -19,7 +19,17 @@ Support development
 
 ## Screenshots
 
-TODO
+Create a grid layout
+
+<img src="./docs/assets/dashboard-empty.png" width="400">
+
+Add embedded content with ease
+
+<img src="./docs/assets/dashboard-full.png" width="400">
+
+Use many different layouts
+
+<img src="./docs/assets/dashboard-grid.png" width="400">
 
 ## Getting Started
 
