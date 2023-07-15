@@ -2,9 +2,7 @@
 
 ![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22dashboards%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
 
-Dashboards is an [Obsidian.md](https://obsidian.md/) plugin. With Dashboards, you can design your own personalized dashboard or home page, tailored to suit your specific needs and workflow.
-
-Dashboards offers flexible grid configurations, allowing you to choose from various layouts such as 1x2, 2x2, 3x3, and more. These grids act as containers where you can embed different elements, including code blocks, urls, and markdown assets.
+Dashboards is an [Obsidian.md](https://obsidian.md/) plugin. With Dashboards, you can design your own personalized dashboard or home page. Dashboards offers flexible grid configurations, allowing you to choose from various layouts such as 1x2, 2x2, 3x3, and more. Each grid contains containers where you can embed different elements, including vault files, code blocks, or external urls.
 
 If you are looking for the plugin that was formally called `Dashboards` please see [DataLoom](https://github.com/trey-wallis/obsidian-dataloom)
 
@@ -25,9 +23,17 @@ TODO
 
 ## Getting Started
 
-1. Create a dashboard file
-2. Choose your layout
-3. In each section, embed a codeblock, url, or markdown file.
+1. Create a new dashboard file
+2. Choose your layout in by using the dropdown in the upper righthand corner
+3. In each container, choose a vault file, a code block, or a external link to embed
+
+### Codeblocks
+
+Embed any Obsidian codeblock using the [normal codeblock syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render Dataview, DataviewJS, or the Tasks plugin code blocks.
+
+### Links
+
+https://help.obsidian.md/Editing+and+formatting/Embedding+web+pages
 
 ## License
 
