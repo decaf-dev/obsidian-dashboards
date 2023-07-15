@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+	"id": "dashboards",
+	"name": "Dashboards",
+	"version": "0.1.0",
+	"minAppVersion": "1.2.0",
+	"description": "Create your own personalized dashboard using customizable grid views",
+	"author": "Trey Wallis",
+	"authorUrl": "https://github.com/trey-wallis",
+	"isDesktopOnly": true,
+	"fundingUrl": "https://www.buymeacoffee.com/treywallis"
 }

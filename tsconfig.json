@@ -6,6 +6,9 @@
     "module": "ESNext",
     "target": "ES6",
     "allowJs": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -19,6 +22,7 @@
     ]
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }
