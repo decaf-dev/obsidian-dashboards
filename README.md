@@ -37,9 +37,9 @@ Use many different layouts
 2. Choose your layout in by using the dropdown in the upper righthand corner
 3. In each container, choose a vault file, a code block, or a external link to embed
 
-### Codeblocks
+### Code blocks
 
-Embed any Obsidian codeblock using the [normal codeblock syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render [Dataview](https://github.com/blacksmithgu/obsidian-dataview), DataviewJS, or [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) plugin code blocks.
+Embed any Obsidian code block using the [normal code block syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render [Dataview](https://github.com/blacksmithgu/obsidian-dataview), DataviewJS, or [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) plugin code blocks.
 
 ### Links
 
