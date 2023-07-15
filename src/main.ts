@@ -7,6 +7,7 @@ import {
 import DashboardsView from "./obsidian/dashboards-view";
 import { createDashboardFile } from "./data/dashboard-file";
 import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab";
+import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "./shared/constants";
 
 interface DashboardsSettings {
 	createInObsidianAttachmentFolder: boolean;
@@ -67,6 +68,18 @@ export default class DashboardsPlugin extends Plugin {
 				}
 			})
 		);
+
+		this.registerDomEvent(document, "keydown", (event) => {
+			if (event.metaKey || event.ctrlKey) {
+				app.workspace.trigger(EVENT_CTRL_DOWN, event);
+			}
+		});
+
+		this.registerDomEvent(document, "keyup", (event) => {
+			if (!event.metaKey && !event.ctrlKey) {
+				app.workspace.trigger(EVENT_CTRL_UP, event);
+			}
+		});
 	}
 
 	private registerCommands() {

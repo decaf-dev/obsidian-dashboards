@@ -1,17 +1,19 @@
-import React from "react";
-import { AppState } from "src/data/types";
+import { WorkspaceLeaf } from "obsidian";
+
+import App from "./app";
+import { AppState } from "src/shared/types";
+import MountProvider from "./mount-provider";
 
 interface Props {
+	leaf: WorkspaceLeaf;
 	initialState: AppState;
-	onStateChange: (state: AppState) => void;
+	onStateChange: (value: AppState) => void;
 }
 
-export default function App({ initialState, onStateChange }: Props) {
-	const [state, setState] = React.useState(initialState);
-
-	React.useEffect(() => {
-		onStateChange(state);
-	}, [state]);
-
-	return <div>{state.pluginVersion}</div>;
+export default function Main({ leaf, initialState, onStateChange }: Props) {
+	return (
+		<MountProvider leaf={leaf}>
+			<App initialState={initialState} onStateChange={onStateChange} />
+		</MountProvider>
+	);
 }
