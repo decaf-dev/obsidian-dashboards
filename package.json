@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-dashboards",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Create your own personalized dashboard using customizable grid views",
 	"main": "main.js",
 	"scripts": {

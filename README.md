@@ -42,17 +42,17 @@ Use many different layouts
 
 To remove an embed from a container, hold down ctrl (Windows) or cmd (Mac) and hover over a container to show the remove button. Then click the remove button
 
-### Embeddable Items
+## Embeddable Items
 
-## Files
+### Files
 
 Any vault files may be embedded into a container
 
-## Code blocks
+### Code blocks
 
 Embed any Obsidian code block using the [normal code block syntax](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks). This may be used to render [Dataview](https://github.com/blacksmithgu/obsidian-dataview), DataviewJS, or [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) plugin code blocks.
 
-## Links
+### Links
 
 Any website will automatically be embedded in an iFrame
 
