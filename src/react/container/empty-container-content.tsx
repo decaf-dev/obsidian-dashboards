@@ -1,6 +1,6 @@
 import LinkModal from "src/obsidian/link-modal";
 import FileModal from "src/obsidian/file-modal";
-import IconButton from "./icon-button";
+import IconButton from "../icon-button/icon-button";
 import { TFile } from "obsidian";
 import CodeblockModal from "src/obsidian/codeblock-modal";
 

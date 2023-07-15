@@ -3,9 +3,9 @@ import React from "react";
 import { css } from "@emotion/react";
 
 import { AppState } from "src/shared/types";
-import Table from "./table";
-import OptionBar from "./option-bar";
-import { getNumContainersX, getNumContainersY } from "./table-utils";
+import Table from "./table/table";
+import OptionBar from "./option-bar/option-bar";
+import { getNumContainersX, getNumContainersY } from "./table/table-utils";
 
 interface Props {
 	initialState: AppState;
