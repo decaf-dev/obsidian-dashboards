@@ -16,9 +16,10 @@ import { TFile } from "obsidian";
 
 interface Props {
 	container?: Container;
+	showBorders: boolean;
 }
 
-export default function Container({ container }: Props) {
+export default function Container({ container, showBorders }: Props) {
 	const leaf = useMountState();
 
 	const [isHovered, setHover] = React.useState(false);
@@ -63,7 +64,9 @@ export default function Container({ container }: Props) {
 				align-items: center;
 				width: 100%;
 				height: 100%;
-				border: 1px solid var(--background-modifier-border);
+				${showBorders
+					? "border: 1px solid var(--background-modifier-border);"
+					: ""}
 			`}
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}

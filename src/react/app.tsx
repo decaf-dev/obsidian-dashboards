@@ -19,7 +19,7 @@ export default function App({ initialState, onStateChange }: Props) {
 		onStateChange(state);
 	}, [state]);
 
-	const { layout, data } = state;
+	const { layout, data, showBorders } = state;
 	const numContainersX = getNumContainersX(layout);
 	const numContainersY = getNumContainersY(layout);
 
@@ -42,9 +42,18 @@ export default function App({ initialState, onStateChange }: Props) {
 						};
 					})
 				}
+				onToggleBorder={() =>
+					setState((prevState) => {
+						return {
+							...prevState,
+							showBorders: !prevState.showBorders,
+						};
+					})
+				}
 			/>
 			<Table
 				data={data}
+				showBorders={showBorders}
 				numContainersX={numContainersX}
 				numContainersY={numContainersY}
 			/>

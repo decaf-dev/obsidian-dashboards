@@ -1,15 +1,20 @@
 import { css } from "@emotion/react";
 import Container from "./container";
 import { Container as ContainerType } from "src/shared/types";
-import { v4 as uuid } from "uuid";
 
 interface Props {
+	showBorders: boolean;
 	data: ContainerType[];
 	numContainersX: number;
 	numContainersY: number;
 }
 
-export default function Table({ data, numContainersX, numContainersY }: Props) {
+export default function Table({
+	showBorders,
+	data,
+	numContainersX,
+	numContainersY,
+}: Props) {
 	return (
 		<table
 			css={css`
@@ -33,7 +38,10 @@ export default function Table({ data, numContainersX, numContainersY }: Props) {
 							);
 							return (
 								<td key={x}>
-									<Container container={container} />
+									<Container
+										showBorders={showBorders}
+										container={container}
+									/>
 								</td>
 							);
 						})}

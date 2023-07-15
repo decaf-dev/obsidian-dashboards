@@ -11,6 +11,7 @@ export const createDefaultAppState = (): AppState => {
 		pluginVersion: CURRENT_PLUGIN_VERSION,
 		layout: LayoutOptions.TWO_BY_TWO,
 		data: [],
+		showBorders: true,
 	};
 };
 
