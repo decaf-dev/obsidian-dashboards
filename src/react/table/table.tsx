@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import Container from "./container";
+import Container from "../container/container";
 import { Container as ContainerType } from "src/shared/types";
 
 interface Props {

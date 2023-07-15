@@ -1,5 +1,26 @@
 import { MarkdownRenderer, WorkspaceLeaf } from "obsidian";
 import DashboardsView from "src/obsidian/dashboards-view";
+import { ContainerType } from "src/shared/types";
+
+export const getMarkdownFromContainerContent = (
+	type: ContainerType,
+	content: string
+) => {
+	switch (type) {
+		case ContainerType.CODEBLOCK:
+			return content;
+		case ContainerType.FILE:
+			if (!content.endsWith(".md")) {
+				const resourcePath = app.vault.adapter.getResourcePath(content);
+				return `![](${resourcePath})`;
+			}
+			return `![[${content}]]`;
+		case ContainerType.LINK:
+			return `![](${content})`;
+		default:
+			throw new Error(`Unknown container type: ${type}`);
+	}
+};
 
 export const appendOrReplaceFirstChild = (
 	container: HTMLElement | null,

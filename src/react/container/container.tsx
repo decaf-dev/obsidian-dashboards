@@ -23,8 +23,8 @@ export default function Container({
 	onAddContainer,
 	onRemoveContainer,
 }: Props) {
-	const [isHovered, setHover] = React.useState(false);
 	const [isCtrlDown, setCtrlDown] = React.useState(false);
+	const [isHovered, setHovered] = React.useState(false);
 
 	function handleCodeblockModalSave(value: string) {
 		const container = createContainer(
@@ -83,8 +83,8 @@ export default function Container({
 					? "border: 1px solid var(--background-modifier-border);"
 					: ""}
 			`}
-			onMouseEnter={() => setHover(true)}
-			onMouseLeave={() => setHover(false)}
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
 		>
 			{container === undefined && (
 				<EmptyContainerContent
@@ -95,9 +95,9 @@ export default function Container({
 			)}
 			{container && (
 				<ContainerContent
-					container={container}
-					isHovered={isHovered}
 					isCtrlDown={isCtrlDown}
+					isHovered={isHovered}
+					container={container}
 					onRemoveClick={() => onRemoveContainer(container.id)}
 				/>
 			)}
