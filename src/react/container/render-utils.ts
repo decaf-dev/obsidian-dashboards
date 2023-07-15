@@ -22,7 +22,7 @@ export const getMarkdownFromContainerContent = (
 			) {
 				return `![](${content})`;
 			}
-			return `<iframe src="${content}"></iframe>`;
+			return `<iframe src="${content}" width="100%" height="100%"></iframe>`;
 		default:
 			throw new Error(`Unknown container type: ${type}`);
 	}
