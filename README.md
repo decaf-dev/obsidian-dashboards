@@ -47,4 +47,4 @@ Any website will automatically be embedded in an iFrame
 
 ## License
 
-Dashboards is distributed under the [GNU General Public License v3.0](https://github.com/trey-wallis/obsidian-dashboards/blob/master/LICENSE)
+Dashboards is distributed under the [MIT License](https://github.com/trey-wallis/obsidian-dashboards/blob/master/LICENSE)
