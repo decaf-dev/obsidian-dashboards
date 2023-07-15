@@ -2,9 +2,8 @@ import {
 	appendOrReplaceFirstChild,
 	renderMarkdown,
 } from "src/shared/render-utils";
-import { Container } from "src/shared/types";
+import { Container, ContainerType } from "src/shared/types";
 import IconButton from "./icon-button";
-import { WorkspaceLeaf } from "obsidian";
 import { useMountState } from "./mount-provider";
 
 interface Props {
@@ -22,22 +21,37 @@ export default function ContainerContent({
 }: Props) {
 	const leaf = useMountState();
 
+	function getMarkdownFromContent(type: ContainerType, content: string) {
+		switch (type) {
+			case ContainerType.CODEBLOCK:
+				return content;
+			case ContainerType.FILE:
+				if (!content.endsWith(".md")) {
+					const resourcePath =
+						app.vault.adapter.getResourcePath(content);
+					return `![](${resourcePath})`;
+				}
+				return `![[${content}]]`;
+			case ContainerType.LINK:
+				return `![](${content})`;
+			default:
+				throw new Error(`Unknown container type: ${type}`);
+		}
+	}
+
 	if (leaf === null)
 		throw new Error("Container component must be mounted in a leaf");
 
+	const markdown = getMarkdownFromContent(container.type, container.content);
+
 	return (
 		<>
-			{(!isCtrlDown || !isHovered) && (
-				<div
-					ref={async (node) => {
-						const markdownDiv = await renderMarkdown(
-							leaf,
-							container.content
-						);
-						appendOrReplaceFirstChild(node, markdownDiv);
-					}}
-				></div>
-			)}
+			<div
+				ref={async (node) => {
+					const markdownDiv = await renderMarkdown(leaf, markdown);
+					appendOrReplaceFirstChild(node, markdownDiv);
+				}}
+			></div>
 			{isCtrlDown && isHovered && (
 				<IconButton
 					tooltip="Remove"

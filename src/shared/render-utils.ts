@@ -25,7 +25,9 @@ export const renderMarkdown = async (leaf: WorkspaceLeaf, markdown: string) => {
 	const view = leaf.view;
 	if (view instanceof DashboardsView) {
 		try {
-			await MarkdownRenderer.renderMarkdown(
+			//@ts-expect-error - private method
+			await MarkdownRenderer.render(
+				app,
 				markdown,
 				div,
 				view.file.path,

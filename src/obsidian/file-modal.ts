@@ -10,9 +10,7 @@ export default class FileModal extends FuzzySuggestModal<TFile> {
 		this.onSaveCallback = onSaveCallback;
 	}
 
-	onOpen(): void {
-		const { contentEl } = this;
-	}
+	onOpen(): void {}
 
 	onClose() {
 		this.contentEl.empty();
