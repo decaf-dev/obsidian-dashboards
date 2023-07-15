@@ -1,4 +1,5 @@
 import { MarkdownRenderer, WorkspaceLeaf } from "obsidian";
+import { DASHBOARDS_VIEW } from "src/data/constants";
 import DashboardsView from "src/obsidian/dashboards-view";
 import { ContainerType } from "src/shared/types";
 
@@ -60,9 +61,76 @@ export const renderMarkdown = async (leaf: WorkspaceLeaf, markdown: string) => {
 				view.file.path,
 				view
 			);
+
+			watchForMutations(div, view);
 		} catch (e) {
 			console.error(e);
 		}
 	}
 	return div;
+};
+
+const handleLinkClick = (event: MouseEvent) => {
+	const targetEl = event.target as HTMLElement;
+	const closestAnchor =
+		targetEl.tagName === "A" ? targetEl : targetEl.closest("a");
+
+	if (!closestAnchor) {
+		return;
+	}
+
+	if (closestAnchor.hasClass("internal-link")) {
+		event.preventDefault();
+
+		const href = closestAnchor.getAttr("href");
+		const newLeaf = event.ctrlKey || event.metaKey;
+
+		if (href) app.workspace.openLinkText(href, "", newLeaf);
+	}
+};
+
+const watchForMutations = (el: HTMLElement, view: DashboardsView) => {
+	const observer = new MutationObserver(function () {
+		// // Handle the mutations here
+		// mutationsList.forEach(function (mutation) {
+		// 	console.log("Mutation type:", mutation.type);
+		// 	console.log("Modified element:", mutation.target);
+		// });
+		checkForEmbeddedLinks(el, view);
+	});
+
+	// Configuration options for the observer (e.g., what types of mutations to observe)
+	const config = { childList: true, subtree: true };
+
+	// Start observing the target node with the specified configuration
+	observer.observe(el, config);
+};
+
+const checkForEmbeddedLinks = (el: HTMLElement, view: DashboardsView) => {
+	const embeds = el.querySelectorAll(".internal-link");
+	embeds.forEach((embed) => {
+		const el = embed as HTMLAnchorElement;
+		const href = el.getAttribute("data-href");
+		if (!href) return;
+
+		const destination = app.metadataCache.getFirstLinkpathDest(
+			href,
+			view.file.path
+		);
+		if (!destination) embed.classList.add("is-unresolved");
+
+		el.addEventListener("mouseover", (e) => {
+			e.stopPropagation();
+			app.workspace.trigger("hover-link", {
+				event: e,
+				source: DASHBOARDS_VIEW,
+				hoverParent: view.containerEl,
+				targetEl: el,
+				linktext: href,
+				sourcePath: el.href,
+			});
+		});
+
+		el.addEventListener("click", handleLinkClick);
+	});
 };
