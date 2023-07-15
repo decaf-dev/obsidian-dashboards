@@ -24,7 +24,7 @@ export default function Table({
 			css={css`
 				width: 100%;
 				height: 100%;
-				border-collapse: collapse;
+				border-spacing: 10px;
 			`}
 		>
 			<tbody>
@@ -51,6 +51,7 @@ export default function Table({
 										showBorders={showBorders}
 										container={container}
 										position={position}
+										numContainersY={numContainersY}
 										onAddContainer={onAddContainer}
 										onRemoveContainer={onRemoveContainer}
 									/>
