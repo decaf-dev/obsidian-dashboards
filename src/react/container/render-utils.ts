@@ -16,7 +16,13 @@ export const getMarkdownFromContainerContent = (
 			}
 			return `![[${content}]]`;
 		case ContainerType.LINK:
-			return `![](${content})`;
+			if (
+				content.contains("twitter.com") ||
+				content.contains("youtube.com")
+			) {
+				return `![](${content})`;
+			}
+			return `<iframe src="${content}"></iframe>`;
 		default:
 			throw new Error(`Unknown container type: ${type}`);
 	}
