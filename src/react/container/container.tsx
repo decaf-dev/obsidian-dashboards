@@ -6,7 +6,7 @@ import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "src/shared/constants";
 import { TFile } from "obsidian";
 import ContainerContent from "./container-content";
 import EmptyContainerContent from "./empty-container-content";
-import { createContainer } from "src/data/app-state-factory";
+import { createContainer } from "src/data/state-factory";
 
 interface Props {
 	container?: Container;

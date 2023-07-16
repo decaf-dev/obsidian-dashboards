@@ -1,5 +1,5 @@
 import { MarkdownRenderer, WorkspaceLeaf } from "obsidian";
-import { DASHBOARDS_VIEW } from "src/data/constants";
+import { DASHBOARDS_VIEW } from "src/data/constants-obsidian";
 import DashboardsView from "src/obsidian/dashboards-view";
 import { ContainerType } from "src/shared/types";
 
