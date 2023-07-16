@@ -6,7 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors"
     ],
     "overrides": [
     ],
@@ -19,14 +20,22 @@
         "react",
         "@typescript-eslint"
     ],
+    "settings": {
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true,
+                "project": "tsconfig.json"
+            }
+        }
+    },
     "rules": {
-    "indent": 
-        ["error", "tab", 
-                { 
-                    "SwitchCase": 1, 
-                    "ignoredNodes": ["ConditionalExpression"] 
-                }
-        ],
+        "indent": 
+            ["error", "tab", 
+                    { 
+                        "SwitchCase": 1, 
+                        "ignoredNodes": ["ConditionalExpression"] 
+                    }
+            ],
         "linebreak-style": [
             "error",
             "unix"
@@ -42,6 +51,19 @@
         //React 18 has React in the global scope
         "react/react-in-jsx-scope": "off",
         //Support the css property from emotion React
-        "react/no-unknown-property": "off"
+        "react/no-unknown-property": "off",
+        //Prevent the data layer from being used by the react layer
+        "import/no-restricted-paths": [
+            "error",
+            {
+                "zones": [
+                {
+                    "target": "src/react/",
+                    "from": "src/data/",
+                    "message": "Importing from 'data' folder into 'react' folder is not allowed."
+                }
+                ]
+            }
+            ]
     }
 }
