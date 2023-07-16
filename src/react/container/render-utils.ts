@@ -1,7 +1,7 @@
 import { MarkdownRenderer, WorkspaceLeaf } from "obsidian";
-import { DASHBOARDS_VIEW } from "src/data/constants-obsidian";
+import { DASHBOARDS_VIEW } from "src/shared/constants";
 import DashboardsView from "src/obsidian/dashboards-view";
-import { ContainerType } from "src/shared/types";
+import { ContainerType } from "src/shared/state/types";
 
 export const getMarkdownFromContainerContent = (
 	type: ContainerType,

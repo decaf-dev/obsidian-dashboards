@@ -1,10 +1,5 @@
-import { CURRENT_PLUGIN_VERSION } from "./constants-obsidian";
-import {
-	AppState,
-	Container,
-	ContainerType,
-	LayoutOptions,
-} from "../shared/types";
+import { CURRENT_PLUGIN_VERSION } from "../../data/constants-obsidian";
+import { AppState, Container, ContainerType, LayoutOptions } from "./types";
 import { v4 as uuid } from "uuid";
 
 /**

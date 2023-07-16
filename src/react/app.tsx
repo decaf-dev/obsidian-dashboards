@@ -2,7 +2,7 @@ import React from "react";
 
 import { css } from "@emotion/react";
 
-import { AppState } from "src/shared/types";
+import { AppState } from "src/shared/state/types";
 import Table from "./table/table";
 import OptionBar from "./option-bar/option-bar";
 import { getNumContainersX, getNumContainersY } from "./table/table-utils";

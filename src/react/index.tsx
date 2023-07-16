@@ -1,7 +1,7 @@
 import { WorkspaceLeaf } from "obsidian";
 
 import App from "./app";
-import { AppState } from "src/shared/types";
+import { AppState } from "src/shared/state/types";
 import MountProvider from "./mount-provider";
 
 interface Props {

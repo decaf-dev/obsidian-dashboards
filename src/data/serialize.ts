@@ -1,6 +1,6 @@
-import { AppState } from "src/shared/types";
+import { AppState } from "src/shared/state/types";
 import { CURRENT_PLUGIN_VERSION } from "./constants-obsidian";
-import { createAppState } from "./state-factory";
+import { createAppState } from "../shared/state/state-factory";
 import { combineObjects } from "./serialize-utils";
 
 /**

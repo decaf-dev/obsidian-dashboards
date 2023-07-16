@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { LayoutOptions } from "src/shared/types";
+import { LayoutOptions } from "src/shared/state/types";
 
 interface Props {
 	layout: LayoutOptions;

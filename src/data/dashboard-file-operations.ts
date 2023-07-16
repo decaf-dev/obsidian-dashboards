@@ -2,7 +2,7 @@ import { Notice } from "obsidian";
 import { createFile } from "./file-operations";
 import { createFolderIfNotExists } from "./folder-operations";
 import { serializeAppState } from "./serialize";
-import { createAppState } from "./state-factory";
+import { createAppState } from "../shared/state/state-factory";
 import { getNewDashboardFilePath } from "./dashboard-file-utils";
 
 /**

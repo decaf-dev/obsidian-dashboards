@@ -1,4 +1,4 @@
-import { LayoutOptions } from "src/shared/types";
+import { LayoutOptions } from "src/shared/state/types";
 
 export const getNumContainersX = (layout: LayoutOptions) => {
 	switch (layout) {

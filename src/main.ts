@@ -1,9 +1,7 @@
 import { Plugin, TFolder } from "obsidian";
 import { DASHBOARD_FILE_EXTENSION } from "./data/constants-file";
-import {
-	CURRENT_PLUGIN_VERSION,
-	DASHBOARDS_VIEW,
-} from "./data/constants-obsidian";
+import { CURRENT_PLUGIN_VERSION } from "./data/constants-obsidian";
+import { DASHBOARDS_VIEW } from "./shared/constants";
 import DashboardsView from "./obsidian/dashboards-view";
 import { createDashboardFile } from "./data/dashboard-file-operations";
 import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab";
