@@ -22,7 +22,7 @@ export default class FileModal extends FuzzySuggestModal<TFile> {
 	getItemText(item: TFile): string {
 		return item.name;
 	}
-	onChooseItem(item: TFile, evt: MouseEvent | KeyboardEvent): void {
+	onChooseItem(item: TFile): void {
 		this.onSaveCallback(item);
 		this.close();
 	}

@@ -19,6 +19,7 @@ export const findDashboardFolderPath = (
 	if (contextMenuFolderPath) {
 		folderPath = contextMenuFolderPath;
 	} else if (createInObsidianAttachmentFolder) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		folderPath = (app.vault as any).getConfig("attachmentFolderPath");
 	} else {
 		folderPath = customFolderForNewFiles;

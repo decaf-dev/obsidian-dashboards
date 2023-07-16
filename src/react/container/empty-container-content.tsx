@@ -1,8 +1,8 @@
-import LinkModal from "src/obsidian/link-modal";
-import FileModal from "src/obsidian/file-modal";
+import LinkModal from "src/obsidian/modal/link-modal";
+import FileModal from "src/obsidian/modal/file-modal";
 import IconButton from "../icon-button/icon-button";
 import { TFile } from "obsidian";
-import CodeBlockModal from "src/obsidian/code-block-modal";
+import CodeBlockModal from "src/obsidian/modal/code-block-modal";
 
 interface Props {
 	onCodeBlockModalSave: (value: string) => void;
