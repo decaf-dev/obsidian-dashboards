@@ -20,6 +20,10 @@ export default class DashboardsView extends TextFileView {
 		//This is the view content container
 		const container = this.containerEl.children[1];
 		this.root = createRoot(container);
+
+		this.addAction("eye-off", "Hide option bar", () => {});
+		this.addAction("maximize", "Toggle border", () => {});
+		this.addAction("layout-grid", "Rearrange grid", () => {});
 	}
 
 	async onClose() {

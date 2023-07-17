@@ -1,7 +1,8 @@
+import React from "react";
+
 import { css } from "@emotion/react";
 import { setIcon } from "obsidian";
-import React from "react";
-import { showLayoutMenu } from "src/obsidian/layout-menu";
+
 import { LayoutOptions } from "src/shared/state/types";
 
 interface Props {
@@ -77,7 +78,10 @@ export default function OptionBar({
 				display: flex;
 				justify-content: flex-end;
 				column-gap: var(--size-2-3);
-				padding: var(--size-4-4);
+				padding-top: 0;
+				padding-bottom: var(--size-4-4);
+				padding-left: var(--size-4-4);
+				padding-right: var(--size-4-4);
 			`}
 		>
 			<div
@@ -113,7 +117,7 @@ export default function OptionBar({
 					}
 				/>
 			</div>
-			<button
+			{/* <button
 				css={css`
 					border: none;
 					box-shadow: none !important;
@@ -125,7 +129,7 @@ export default function OptionBar({
 						onToggleBorder,
 					})
 				}
-			></button>
+			></button> */}
 		</div>
 	);
 }
