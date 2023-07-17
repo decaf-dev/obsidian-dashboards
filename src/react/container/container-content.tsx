@@ -1,8 +1,8 @@
 import { getMarkdownFromContainerContent } from "src/react/container/render-utils";
-import { Container } from "src/shared/types";
+import { Container } from "src/shared/state/types";
 import IconButton from "../icon-button/icon-button";
 import { useMountState } from "../mount-provider";
-import { RenderMarkdown } from "./render-markdown";
+import RenderMarkdown from "./render-markdown";
 import { css } from "@emotion/react";
 
 interface Props {

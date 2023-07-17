@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 
-import { Container, ContainerType } from "src/shared/types";
+import { Container, ContainerType } from "src/shared/state/types";
 import React from "react";
 import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "src/shared/constants";
 import { TFile } from "obsidian";
 import ContainerContent from "./container-content";
 import EmptyContainerContent from "./empty-container-content";
-import { createContainer } from "src/data/app-state-factory";
+import { createContainer } from "src/shared/state/state-factory";
 
 interface Props {
 	container?: Container;

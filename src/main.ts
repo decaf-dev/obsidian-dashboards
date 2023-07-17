@@ -1,13 +1,12 @@
-import { Plugin, TFolder, normalizePath } from "obsidian";
-import {
-	CURRENT_PLUGIN_VERSION,
-	DASHBOARDS_VIEW,
-	DASHBOARD_FILE_EXTENSION,
-} from "./data/constants";
+import { Plugin, TFolder } from "obsidian";
+import { DASHBOARD_FILE_EXTENSION } from "./data/constants-file";
+import { CURRENT_PLUGIN_VERSION } from "./data/constants-obsidian";
+import { DASHBOARDS_VIEW } from "./shared/constants";
 import DashboardsView from "./obsidian/dashboards-view";
-import { createDashboardFile } from "./data/dashboard-file";
+import { createDashboardFile } from "./data/dashboard-file-operations";
 import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab";
 import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "./shared/constants";
+import { findDashboardFolderPath } from "./data/dashboard-folder-utils";
 
 interface DashboardsSettings {
 	createInObsidianAttachmentFolder: boolean;
@@ -31,7 +30,7 @@ export default class DashboardsPlugin extends Plugin {
 		this.registerExtensions([DASHBOARD_FILE_EXTENSION], DASHBOARDS_VIEW);
 
 		this.addRibbonIcon("gauge", "Create new dashboard", async () => {
-			await this.handleCreateDashboardFile();
+			await this.handleCreateDashboardFile(null);
 		});
 
 		this.registerEvents();
@@ -87,30 +86,17 @@ export default class DashboardsPlugin extends Plugin {
 			id: "databoards-create",
 			name: "Create dashboard",
 			callback: async () => {
-				await this.handleCreateDashboardFile();
+				await this.handleCreateDashboardFile(null);
 			},
 		});
 	}
 
-	private handleCreateDashboardFile(contextMenuFolderPath?: string) {
-		const folderPath = this.findDashboardFolderPath(contextMenuFolderPath);
+	private handleCreateDashboardFile(contextMenuFolderPath: string | null) {
+		const folderPath = findDashboardFolderPath(contextMenuFolderPath, {
+			createInObsidianAttachmentFolder:
+				this.settings.createInObsidianAttachmentFolder,
+			customFolderForNewFiles: this.settings.customFolderForNewFiles,
+		});
 		createDashboardFile(folderPath);
-	}
-
-	private findDashboardFolderPath(contextMenuFolderPath?: string) {
-		let folderPath = "/";
-
-		if (contextMenuFolderPath) {
-			folderPath = contextMenuFolderPath;
-		} else if (this.settings.createInObsidianAttachmentFolder) {
-			folderPath = (this.app.vault as any).getConfig(
-				"attachmentFolderPath"
-			);
-		} else {
-			folderPath = this.settings.customFolderForNewFiles;
-		}
-		const normalized = normalizePath(folderPath);
-		if (normalized === ".") return "/";
-		return normalized;
 	}
 }

@@ -1,11 +1,8 @@
 import { TextFileView, WorkspaceLeaf } from "obsidian";
-import { AppState } from "src/shared/types";
+import { AppState } from "src/shared/state/types";
 import { createRoot, Root } from "react-dom/client";
-import {
-	deserializeAppState,
-	serializeAppState,
-} from "src/data/serialize-app-state";
-import { DASHBOARDS_VIEW } from "src/data/constants";
+import { deserializeAppState, serializeAppState } from "src/data/serialize";
+import { DASHBOARDS_VIEW } from "src/shared/constants";
 import Main from "src/react";
 
 export default class DashboardsView extends TextFileView {

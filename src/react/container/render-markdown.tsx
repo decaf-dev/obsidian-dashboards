@@ -9,7 +9,7 @@ interface Props {
 	numContainersY: number;
 }
 
-export const RenderMarkdown = React.memo(
+const RenderMarkdown = React.memo(
 	({ leaf, markdown, numContainersY }: Props) => {
 		return (
 			<div
@@ -40,3 +40,6 @@ export const RenderMarkdown = React.memo(
 		);
 	}
 );
+
+RenderMarkdown.displayName = "RenderMarkdown";
+export default RenderMarkdown;
