@@ -6,19 +6,19 @@
  * @param obj2
  */
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const combineObjects = (obj1: any, obj2: any) => {
+export const combineObjects = (defaultObj: any, newObj: any) => {
 	// Create a new object with the properties of obj1
-	const result = { ...obj1 };
+	const result = { ...defaultObj };
 
-	for (const key in obj1) {
-		if (!(key in obj2)) {
+	for (const key in newObj) {
+		result[key] = newObj[key];
+	}
+
+	for (const key in newObj) {
+		if (!(key in defaultObj)) {
 			// Remove the key if it doesn't exist in the second object
 			delete result[key];
 		}
-	}
-
-	for (const key in obj2) {
-		result[key] = obj2[key];
 	}
 	return result;
 };
