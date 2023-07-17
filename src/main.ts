@@ -91,12 +91,20 @@ export default class DashboardsPlugin extends Plugin {
 		});
 	}
 
-	private handleCreateDashboardFile(contextMenuFolderPath: string | null) {
+	private async handleCreateDashboardFile(
+		contextMenuFolderPath: string | null
+	) {
 		const folderPath = findDashboardFolderPath(contextMenuFolderPath, {
 			createInObsidianAttachmentFolder:
 				this.settings.createInObsidianAttachmentFolder,
 			customFolderForNewFiles: this.settings.customFolderForNewFiles,
 		});
-		createDashboardFile(folderPath);
+		const path = await createDashboardFile(folderPath);
+
+		await app.workspace.getLeaf(true).setViewState({
+			type: DASHBOARDS_VIEW,
+			active: true,
+			state: { file: path },
+		});
 	}
 }
