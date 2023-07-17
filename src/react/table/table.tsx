@@ -4,6 +4,7 @@ import { Container as ContainerType } from "src/shared/state/types";
 
 interface Props {
 	showBorders: boolean;
+	borderSpacing: string;
 	data: ContainerType[];
 	numContainersX: number;
 	numContainersY: number;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function Table({
+	borderSpacing,
 	showBorders,
 	data,
 	numContainersX,
@@ -24,7 +26,7 @@ export default function Table({
 			css={css`
 				width: 100%;
 				height: 100%;
-				border-spacing: 10px;
+				border-spacing: ${borderSpacing};
 			`}
 		>
 			<tbody>
@@ -45,6 +47,7 @@ export default function Table({
 									key={x}
 									css={css`
 										width: ${100 / numContainersX}%;
+										padding: 0;
 									`}
 								>
 									<Container

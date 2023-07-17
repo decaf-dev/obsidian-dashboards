@@ -19,7 +19,7 @@ export default function App({ initialState, onStateChange }: Props) {
 		onStateChange(state);
 	}, [state]);
 
-	const { layout, data, showBorders } = state;
+	const { layout, data, showBorders, borderSpacing } = state;
 	const numContainersX = getNumContainersX(layout);
 	const numContainersY = getNumContainersY(layout);
 
@@ -34,6 +34,7 @@ export default function App({ initialState, onStateChange }: Props) {
 			`}
 		>
 			<OptionBar
+				borderSpacing={borderSpacing}
 				layout={layout}
 				onLayoutChange={(value) =>
 					setState((prevState) => {
@@ -51,9 +52,18 @@ export default function App({ initialState, onStateChange }: Props) {
 						};
 					})
 				}
+				onBorderSpacingChange={(value) =>
+					setState((prevState) => {
+						return {
+							...prevState,
+							borderSpacing: value,
+						};
+					})
+				}
 			/>
 			<Table
 				data={data}
+				borderSpacing={borderSpacing}
 				showBorders={showBorders}
 				numContainersX={numContainersX}
 				numContainersY={numContainersY}

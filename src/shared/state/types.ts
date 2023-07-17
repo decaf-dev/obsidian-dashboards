@@ -27,4 +27,5 @@ export interface AppState {
 	showBorders: boolean;
 	layout: LayoutOptions;
 	data: Container[];
+	borderSpacing: string;
 }
