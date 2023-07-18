@@ -18,15 +18,26 @@ export const updateContainerPosition = (
 	// If there's no object at the new position, return the array
 	if (!objAtNewPosition) return arr;
 
+	return updatePositions(arr, id, newPosition);
+};
+
+const updatePositions = (arr: Container[], id: string, newPosition: number) => {
+	const arrCopy = [...arr];
 	let lastPosition = newPosition;
+	let lastId = id;
 
 	// Increment the position of all objects after the new object
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i].position === lastPosition) {
-			arr[i].position++;
-			lastPosition = arr[i].position;
+	for (let i = 0; i < arrCopy.length; i++) {
+		const obj = arrCopy[i];
+		const { position } = obj;
+		if (position === lastPosition && obj.id !== lastId) {
+			const newPosition = lastPosition + 1;
+			lastPosition = newPosition;
+			lastId = obj.id;
+			obj.position = newPosition;
+			updatePositions(arrCopy, lastId, newPosition); // Recursive call
 		}
 	}
 
-	return arr;
+	return arrCopy;
 };
