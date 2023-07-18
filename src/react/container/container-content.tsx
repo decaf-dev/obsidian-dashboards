@@ -22,10 +22,7 @@ export default function ContainerContent({
 	numContainersY,
 	onRemoveClick,
 }: Props) {
-	const leaf = useMountState();
-
-	if (leaf === null)
-		throw new Error("Container component must be mounted in a leaf");
+	const { leaf } = useMountState();
 
 	const markdown = getMarkdownFromContainerContent(
 		container.type,

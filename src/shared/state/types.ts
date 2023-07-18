@@ -25,6 +25,7 @@ export enum LayoutOptions {
 export interface AppState {
 	pluginVersion: string;
 	showBorders: boolean;
+	showOptionBar: boolean;
 	layout: LayoutOptions;
 	data: Container[];
 	borderSpacing: string;

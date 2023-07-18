@@ -1,7 +1,4 @@
-import React from "react";
-
 import { css } from "@emotion/react";
-import { setIcon } from "obsidian";
 
 import { LayoutOptions } from "src/shared/state/types";
 
@@ -17,60 +14,8 @@ export default function OptionBar({
 	borderSpacing,
 	layout,
 	onLayoutChange,
-	onToggleBorder,
 	onBorderSpacingChange,
 }: Props) {
-	const ref = React.useRef<HTMLButtonElement>(null);
-	const [position, setPosition] = React.useState({ x: 0, y: 0 });
-
-	React.useEffect(() => {
-		let observer: MutationObserver | null = null;
-
-		const handleSizeChanges = (mutationsList: any) => {
-			console.log(mutationsList);
-			for (let mutation of mutationsList) {
-				if (
-					mutation.type === "attributes" &&
-					mutation.attributeName === "style"
-				) {
-					const rect = ref.current?.getBoundingClientRect();
-					if (rect) {
-						const { x, y } = rect;
-						setPosition({ x, y });
-					}
-				}
-			}
-		};
-
-		const appContainer = document.querySelector("body");
-		if (appContainer) {
-			// Create a new mutation observer
-			const observer = new MutationObserver(handleSizeChanges);
-
-			// Configure and start the observer
-			const observerConfig = {
-				attributes: true,
-				attributeFilter: ["style"],
-			};
-
-			observer.observe(appContainer, observerConfig);
-		}
-
-		return () => {
-			observer?.disconnect();
-		};
-	}, [ref.current]);
-
-	React.useEffect(() => {
-		if (ref.current) {
-			setIcon(ref.current, "more-vertical");
-			const { x, y } = ref.current.getBoundingClientRect();
-			setPosition({ x, y });
-		}
-	}, []);
-
-	console.log(borderSpacing);
-
 	return (
 		<div
 			css={css`
@@ -117,19 +62,6 @@ export default function OptionBar({
 					}
 				/>
 			</div>
-			{/* <button
-				css={css`
-					border: none;
-					box-shadow: none !important;
-					padding: var(--size-2-2) var(--size-2-3);
-				`}
-				ref={ref}
-				onClick={() =>
-					showLayoutMenu(position, {
-						onToggleBorder,
-					})
-				}
-			></button> */}
 		</div>
 	);
 }

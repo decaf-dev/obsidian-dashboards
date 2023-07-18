@@ -1,7 +1,10 @@
 import { WorkspaceLeaf } from "obsidian";
 import React from "react";
 
-const MountContext = React.createContext<WorkspaceLeaf | null>(null);
+const MountContext = React.createContext<{
+	leaf: WorkspaceLeaf;
+	appId: string;
+} | null>(null);
 
 export const useMountState = () => {
 	const value = React.useContext(MountContext);
@@ -15,12 +18,15 @@ export const useMountState = () => {
 };
 
 interface Props {
+	appId: string;
 	leaf: WorkspaceLeaf;
 	children: React.ReactNode;
 }
 
-export default function MountProvider({ leaf, children }: Props) {
+export default function MountProvider({ appId, leaf, children }: Props) {
 	return (
-		<MountContext.Provider value={leaf}>{children}</MountContext.Provider>
+		<MountContext.Provider value={{ appId, leaf }}>
+			{children}
+		</MountContext.Provider>
 	);
 }

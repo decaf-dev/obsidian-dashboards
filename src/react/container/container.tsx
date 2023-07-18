@@ -78,7 +78,7 @@ export default function Container({
 		if (ref.current) {
 			setHeight(ref.current.clientHeight);
 		}
-	}, [ref.current]);
+	}, []);
 
 	return (
 		<div

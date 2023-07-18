@@ -1,12 +1,19 @@
 import { TextFileView, WorkspaceLeaf } from "obsidian";
 import { AppState } from "src/shared/state/types";
 import { createRoot, Root } from "react-dom/client";
+import { v4 as uuidv4 } from "uuid";
+
 import { deserializeAppState, serializeAppState } from "src/data/serialize";
-import { DASHBOARDS_VIEW } from "src/shared/constants";
+import {
+	DASHBOARDS_VIEW,
+	EVENT_BORDER_TOGGLE,
+	EVENT_OPTION_BAR_TOGGLE,
+} from "src/shared/constants";
 import Main from "src/react";
 
 export default class DashboardsView extends TextFileView {
 	private root: Root | null;
+	private appId: string;
 
 	data: string;
 
@@ -14,6 +21,7 @@ export default class DashboardsView extends TextFileView {
 		super(leaf);
 		this.root = null;
 		this.data = "";
+		this.appId = uuidv4();
 	}
 
 	async onOpen() {
@@ -21,8 +29,12 @@ export default class DashboardsView extends TextFileView {
 		const container = this.containerEl.children[1];
 		this.root = createRoot(container);
 
-		this.addAction("eye-off", "Hide option bar", () => {});
-		this.addAction("maximize", "Toggle border", () => {});
+		this.addAction("eye-off", "Hide option bar", () => {
+			app.workspace.trigger(EVENT_OPTION_BAR_TOGGLE, this.appId);
+		});
+		this.addAction("maximize", "Toggle border", () => {
+			app.workspace.trigger(EVENT_BORDER_TOGGLE, this.appId);
+		});
 		this.addAction("layout-grid", "Rearrange grid", () => {});
 	}
 
@@ -77,6 +89,7 @@ export default class DashboardsView extends TextFileView {
 		if (this.root) {
 			this.root.render(
 				<Main
+					appId={this.appId}
 					leaf={this.leaf}
 					initialState={state}
 					onStateChange={this.handleSaveLoomState}
