@@ -10,7 +10,7 @@ interface Props {
 	isCtrlDown: boolean;
 	isHovered: boolean;
 	height: number;
-	numContainersY: number;
+	gridY: number;
 	onRemoveClick: () => void;
 }
 
@@ -19,13 +19,10 @@ export default function ContainerContent({
 	isHovered,
 	container,
 	height,
-	numContainersY,
+	gridY,
 	onRemoveClick,
 }: Props) {
-	const leaf = useMountState();
-
-	if (leaf === null)
-		throw new Error("Container component must be mounted in a leaf");
+	const { leaf } = useMountState();
 
 	const markdown = getMarkdownFromContainerContent(
 		container.type,
@@ -64,11 +61,7 @@ export default function ContainerContent({
 					)}
 				</div>
 			</div>
-			<RenderMarkdown
-				leaf={leaf}
-				markdown={markdown}
-				numContainersY={numContainersY}
-			/>
+			<RenderMarkdown leaf={leaf} markdown={markdown} gridY={gridY} />
 		</>
 	);
 }

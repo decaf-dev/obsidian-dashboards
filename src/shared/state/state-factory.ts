@@ -11,6 +11,8 @@ export const createAppState = (): AppState => {
 		layout: LayoutOptions.TWO_BY_TWO,
 		data: [],
 		showBorders: true,
+		showOptionBar: true,
+		borderSpacing: "20px",
 	};
 };
 

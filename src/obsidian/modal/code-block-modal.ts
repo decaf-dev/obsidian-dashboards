@@ -13,7 +13,7 @@ export default class CodeBlockModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
-		contentEl.createEl("h4", { text: "Add code block" });
+		contentEl.createEl("h2", { text: "Add code block" });
 
 		const containerEl = contentEl.createDiv();
 		containerEl.style.display = "flex";
