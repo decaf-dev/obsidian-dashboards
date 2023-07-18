@@ -83,7 +83,7 @@ export default class DashboardsPlugin extends Plugin {
 
 	private registerCommands() {
 		this.addCommand({
-			id: "databoards-create",
+			id: "create",
 			name: "Create dashboard",
 			callback: async () => {
 				await this.handleCreateDashboardFile(null);
