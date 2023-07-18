@@ -90,6 +90,7 @@ const handleLinkClick = (event: MouseEvent) => {
 };
 
 const watchForMutations = (el: HTMLElement, view: DashboardsView) => {
+	//TODO clean up
 	const observer = new MutationObserver(function () {
 		// // Handle the mutations here
 		// mutationsList.forEach(function (mutation) {

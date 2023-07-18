@@ -13,7 +13,7 @@ export default class LinkModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
-		contentEl.createEl("h4", { text: "Add link" });
+		contentEl.createEl("h2", { text: "Add link" });
 
 		const containerEl = contentEl.createDiv();
 		containerEl.style.display = "flex";

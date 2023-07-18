@@ -12,7 +12,7 @@ interface Props {
 	container?: Container;
 	showBorders: boolean;
 	position: number;
-	numContainersY: number;
+	gridY: number;
 	onAddContainer: (value: Container) => void;
 	onRemoveContainer: (id: string) => void;
 }
@@ -21,7 +21,7 @@ export default function Container({
 	container,
 	position,
 	showBorders,
-	numContainersY,
+	gridY,
 	onAddContainer,
 	onRemoveContainer,
 }: Props) {
@@ -110,7 +110,7 @@ export default function Container({
 					height={height}
 					isHovered={isHovered}
 					container={container}
-					numContainersY={numContainersY}
+					gridY={gridY}
 					onRemoveClick={() => onRemoveContainer(container.id)}
 				/>
 			)}

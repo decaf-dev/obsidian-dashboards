@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import { AppState } from "src/shared/state/types";
 import Table from "./table/table";
 import OptionBar from "./option-bar/option-bar";
-import { getNumContainersX, getNumContainersY } from "./table/table-utils";
+import { getGridX, getGridY } from "./table/table-utils";
 import {
 	EVENT_BORDER_TOGGLE,
 	EVENT_OPTION_BAR_TOGGLE,
@@ -26,8 +26,8 @@ export default function App({ initialState, onStateChange }: Props) {
 	}, [state, onStateChange]);
 
 	const { layout, data, showBorders, borderSpacing, showOptionBar } = state;
-	const numContainersX = getNumContainersX(layout);
-	const numContainersY = getNumContainersY(layout);
+	const gridX = getGridX(layout);
+	const gridY = getGridY(layout);
 
 	React.useEffect(() => {
 		function handleOptionBarToggle(eventAppId: string) {
@@ -109,8 +109,8 @@ export default function App({ initialState, onStateChange }: Props) {
 				data={data}
 				borderSpacing={borderSpacing}
 				showBorders={showBorders}
-				numContainersX={numContainersX}
-				numContainersY={numContainersY}
+				gridX={gridX}
+				gridY={gridY}
 				onAddContainer={(container) => {
 					setState((prevState) => {
 						return {
