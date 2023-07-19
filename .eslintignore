@@ -1,11 +1,3 @@
 node_modules/
 
-# Ignore build files
-
-main.css
 main.js
-styles.css
-
-# Ignore local files
-
-data.json
