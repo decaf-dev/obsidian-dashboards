@@ -2,7 +2,9 @@ import { App, Modal } from "obsidian";
 import { deserializeAppState } from "src/data/serialize";
 import { getGridX, getGridY } from "src/react/table/table-utils";
 import { AppState, Container } from "src/shared/state/types";
-import { updateContainerPosition } from "./arr-utils";
+import { updateContainerPosition } from "./array-utils";
+
+import "./layout-modal.css";
 
 interface AssignedRowElement extends HTMLDivElement {
 	cleanUp?: () => void;
@@ -26,6 +28,8 @@ export default class LayoutModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
+		contentEl.addClass("Dashboards__layout-modal");
+
 		const { layout, data } = this.state;
 		const gridX = getGridX(layout);
 		const gridY = getGridY(layout);
@@ -85,15 +89,11 @@ export default class LayoutModal extends Modal {
 	}
 
 	private renderTitle(contentEl: HTMLElement, title: string) {
-		const titleEl = contentEl.createEl("h4", { text: title });
-		titleEl.style.marginBottom = "var(--size-2-3)";
+		contentEl.createEl("h4", { text: title });
 	}
 
 	private renderRowContainer(contentEl: HTMLElement) {
 		const containerEl = contentEl.createDiv();
-		containerEl.style.display = "flex";
-		containerEl.style.flexDirection = "column";
-		containerEl.style.gap = "var(--size-2-3)";
 		return containerEl;
 	}
 
@@ -136,18 +136,10 @@ export default class LayoutModal extends Modal {
 			cls: "Dashboards__assigned-row",
 		});
 		const containerEl = rowEl.createDiv();
-		containerEl.style.display = "flex";
-		containerEl.style.flexDirection = "row";
-		containerEl.style.padding = "var(--size-2-3) var(--size-4-4)";
-		containerEl.style.columnGap = "var(--size-4-4)";
-		containerEl.style.borderTop =
-			"1px solid var(--background-modifier-border)";
-		containerEl.style.borderBottom =
-			"1px solid var(--background-modifier-border)";
 
 		if (id) {
 			rowEl.draggable = true;
-			rowEl.style.cursor = "grab";
+			rowEl.addClass("Dashboards__draggable");
 			rowEl.addEventListener("dragstart", handleDragStart);
 		}
 		rowEl.addEventListener("dragover", handleDropOver);
@@ -159,12 +151,9 @@ export default class LayoutModal extends Modal {
 		};
 
 		containerEl.createDiv({ text: position.toString() });
-		const textEl = containerEl.createDiv({
+		containerEl.createEl("p", {
 			text: content ? content : "Empty",
 		});
-		textEl.style.whiteSpace = "nowrap";
-		textEl.style.overflow = "hidden";
-		textEl.style.textOverflow = "ellipsis";
 	}
 
 	onClose() {

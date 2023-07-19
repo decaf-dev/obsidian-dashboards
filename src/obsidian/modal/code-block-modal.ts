@@ -1,5 +1,7 @@
 import { App, Modal } from "obsidian";
 
+import "./code-block-modal.css";
+
 type SaveCallback = (value: string) => void;
 
 export default class CodeBlockModal extends Modal {
@@ -13,12 +15,10 @@ export default class CodeBlockModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
+		contentEl.addClass("Dashboards__code-block-modal");
 		contentEl.createEl("h2", { text: "Add code block" });
 
 		const containerEl = contentEl.createDiv();
-		containerEl.style.display = "flex";
-		containerEl.style.flexDirection = "column";
-		containerEl.style.gap = "var(--size-4-4)";
 
 		this.renderInputEl(containerEl);
 		this.renderButtonEl(containerEl);
@@ -30,8 +30,6 @@ export default class CodeBlockModal extends Modal {
 
 	private renderInputEl(containerEl: HTMLElement) {
 		this.inputEl = containerEl.createEl("textarea");
-		this.inputEl.style.height = "150px";
-		this.inputEl.style.resize = "none";
 		this.inputEl.focus();
 	}
 
