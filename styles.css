@@ -53,3 +53,8 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+/* src/obsidian/dashboards-settings-tab.ts/styles.css */
+.Dashboards__setting-emphasize {
+    color: var(--text-accent);
+}

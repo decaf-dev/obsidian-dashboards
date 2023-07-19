@@ -3,7 +3,7 @@ import { DASHBOARD_FILE_EXTENSION } from "./data/constants";
 import { DASHBOARDS_VIEW } from "./shared/constants";
 import DashboardsView from "./obsidian/dashboards-view";
 import { createDashboardFile } from "./data/dashboard-file-operations";
-import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab";
+import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab.ts";
 import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "./shared/constants";
 import { findDashboardFolderPath } from "./data/dashboard-folder-utils";
 
