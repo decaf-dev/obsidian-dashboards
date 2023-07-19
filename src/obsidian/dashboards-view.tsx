@@ -10,7 +10,7 @@ import {
 	EVENT_OPTION_BAR_TOGGLE,
 } from "src/shared/constants";
 import Main from "src/react";
-import LayoutModal from "./modal/layout-modal";
+import LayoutModal from "./layout-modal";
 import { createAppState } from "src/shared/state/state-factory";
 
 export default class DashboardsView extends TextFileView {

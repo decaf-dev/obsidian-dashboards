@@ -1,4 +1,4 @@
-/* src/obsidian/modal/link-modal.css */
+/* src/obsidian/link-modal/styles.css */
 .Dashboards__link-modal>div {
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     font-size: 16px;
 }
 
-/* src/obsidian/modal/code-block-modal.css */
+/* src/obsidian/code-block-modal/styles.css */
 .Dashboards__code-block-modal>div {
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
     resize: none;
 }
 
-/* src/obsidian/modal/layout-modal.css */
+/* src/obsidian/layout-modal/styles.css */
 .Dashboards__layout-modal h4 {
     margin-bottom: var(--size-2-3);
 }

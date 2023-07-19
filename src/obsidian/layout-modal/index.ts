@@ -2,9 +2,9 @@ import { App, Modal } from "obsidian";
 import { deserializeAppState } from "src/data/serialize";
 import { getGridX, getGridY } from "src/react/table/table-utils";
 import { AppState, Container } from "src/shared/state/types";
-import { updateContainerPosition } from "./array-utils";
+import { updateContainerPosition } from "../modal/array-utils";
 
-import "./layout-modal.css";
+import "./styles.css";
 
 interface AssignedRowElement extends HTMLDivElement {
 	cleanUp?: () => void;

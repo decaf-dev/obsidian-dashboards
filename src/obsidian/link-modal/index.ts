@@ -1,6 +1,6 @@
 import { App, Modal } from "obsidian";
 
-import "./link-modal.css";
+import "./styles.css";
 
 type SaveCallback = (value: string) => void;
 
