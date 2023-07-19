@@ -17,12 +17,12 @@ export default class FileModal extends FuzzySuggestModal<TFile> {
 	}
 
 	getItems(): TFile[] {
-		return app.vault.getFiles();
+		return this.app.vault.getFiles();
 	}
 	getItemText(item: TFile): string {
 		return item.name;
 	}
-	onChooseItem(item: TFile, evt: MouseEvent | KeyboardEvent): void {
+	onChooseItem(item: TFile): void {
 		this.onSaveCallback(item);
 		this.close();
 	}

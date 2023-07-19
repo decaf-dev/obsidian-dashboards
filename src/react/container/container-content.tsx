@@ -1,8 +1,8 @@
 import { getMarkdownFromContainerContent } from "src/react/container/render-utils";
-import { Container } from "src/shared/types";
+import { Container } from "src/shared/state/types";
 import IconButton from "../icon-button/icon-button";
 import { useMountState } from "../mount-provider";
-import { RenderMarkdown } from "./render-markdown";
+import RenderMarkdown from "./render-markdown";
 import { css } from "@emotion/react";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 	isCtrlDown: boolean;
 	isHovered: boolean;
 	height: number;
-	numContainersY: number;
+	gridY: number;
 	onRemoveClick: () => void;
 }
 
@@ -19,15 +19,13 @@ export default function ContainerContent({
 	isHovered,
 	container,
 	height,
-	numContainersY,
+	gridY,
 	onRemoveClick,
 }: Props) {
-	const leaf = useMountState();
-
-	if (leaf === null)
-		throw new Error("Container component must be mounted in a leaf");
+	const { leaf, app } = useMountState();
 
 	const markdown = getMarkdownFromContainerContent(
+		app,
 		container.type,
 		container.content
 	);
@@ -65,9 +63,10 @@ export default function ContainerContent({
 				</div>
 			</div>
 			<RenderMarkdown
+				app={app}
 				leaf={leaf}
 				markdown={markdown}
-				numContainersY={numContainersY}
+				gridY={gridY}
 			/>
 		</>
 	);

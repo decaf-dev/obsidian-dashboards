@@ -1,0 +1,30 @@
+.Dashboards__layout-modal h4 {
+    margin-bottom: var(--size-2-3);
+}
+
+.Dashboards__layout-modal > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2-3);
+}
+
+.Dashboards__layout-modal > div > div > div {
+    display: flex;
+    flex-direction: row;
+    padding: var(--size-2-3) var(--size-4-4);
+    column-gap: var(--size-4-4);
+    border-top: 1px solid var(--background-modifier-border);
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.Dashboards__draggable {
+    cursor: grab;
+}
+
+.Dashboards__layout-modal p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0;
+    margin-bottom: 0;
+}

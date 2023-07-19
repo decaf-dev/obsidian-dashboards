@@ -1,0 +1,10 @@
+.Dashboards__link-modal > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-4);
+}
+
+.Dashboards__link-modal input[type="text"] {
+    padding: var(--size-2-2) var(--size-4-2);
+    font-size: 16px;
+}

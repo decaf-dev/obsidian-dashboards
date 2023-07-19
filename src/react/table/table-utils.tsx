@@ -1,6 +1,6 @@
-import { LayoutOptions } from "src/shared/types";
+import { LayoutOptions } from "src/shared/state/types";
 
-export const getNumContainersX = (layout: LayoutOptions) => {
+export const getGridX = (layout: LayoutOptions) => {
 	switch (layout) {
 		case LayoutOptions.ONE_BY_TWO:
 			return 1;
@@ -23,7 +23,7 @@ export const getNumContainersX = (layout: LayoutOptions) => {
 	}
 };
 
-export const getNumContainersY = (layout: LayoutOptions) => {
+export const getGridY = (layout: LayoutOptions) => {
 	switch (layout) {
 		case LayoutOptions.ONE_BY_TWO:
 			return 2;
