@@ -1,3 +1,4 @@
+import { App } from "obsidian";
 import { splitAtFileExtension } from "./file-utils";
 
 const getFilePathWithIteration = (
@@ -18,6 +19,7 @@ const getFilePathWithIteration = (
  * @returns
  */
 export const createFile = async (
+	app: App,
 	filePath: string,
 	data: string,
 	numExisting = 0
@@ -39,7 +41,7 @@ export const createFile = async (
 		const error = err as Error;
 
 		if (error.message.includes("File already exists")) {
-			return createFile(filePath, data, numExisting + 1);
+			return createFile(app, filePath, data, numExisting + 1);
 		} else {
 			throw err;
 		}

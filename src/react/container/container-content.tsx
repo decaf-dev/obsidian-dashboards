@@ -22,9 +22,10 @@ export default function ContainerContent({
 	gridY,
 	onRemoveClick,
 }: Props) {
-	const { leaf } = useMountState();
+	const { leaf, app } = useMountState();
 
 	const markdown = getMarkdownFromContainerContent(
+		app,
 		container.type,
 		container.content
 	);
@@ -61,7 +62,12 @@ export default function ContainerContent({
 					)}
 				</div>
 			</div>
-			<RenderMarkdown leaf={leaf} markdown={markdown} gridY={gridY} />
+			<RenderMarkdown
+				app={app}
+				leaf={leaf}
+				markdown={markdown}
+				gridY={gridY}
+			/>
 		</>
 	);
 }

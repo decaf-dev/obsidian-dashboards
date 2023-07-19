@@ -27,7 +27,7 @@ export default class DashboardsPlugin extends Plugin {
 
 		this.registerView(
 			DASHBOARDS_VIEW,
-			(leaf) => new DashboardsView(leaf, this.manifest.version)
+			(leaf) => new DashboardsView(this.app, leaf, this.manifest.version)
 		);
 		this.registerExtensions([DASHBOARD_FILE_EXTENSION], DASHBOARDS_VIEW);
 
@@ -77,13 +77,13 @@ export default class DashboardsPlugin extends Plugin {
 
 		this.registerDomEvent(document, "keydown", (event) => {
 			if (event.metaKey || event.ctrlKey) {
-				app.workspace.trigger(EVENT_CTRL_DOWN, event);
+				this.app.workspace.trigger(EVENT_CTRL_DOWN, event);
 			}
 		});
 
 		this.registerDomEvent(document, "keyup", (event) => {
 			if (!event.metaKey && !event.ctrlKey) {
-				app.workspace.trigger(EVENT_CTRL_UP, event);
+				this.app.workspace.trigger(EVENT_CTRL_UP, event);
 			}
 		});
 	}
@@ -101,14 +101,22 @@ export default class DashboardsPlugin extends Plugin {
 	private async handleCreateDashboardFile(
 		contextMenuFolderPath: string | null
 	) {
-		const folderPath = findDashboardFolderPath(contextMenuFolderPath, {
-			createInObsidianAttachmentFolder:
-				this.settings.createInObsidianAttachmentFolder,
-			customFolderForNewFiles: this.settings.customFolderForNewFiles,
-		});
-		const path = await createDashboardFile(folderPath);
+		const folderPath = findDashboardFolderPath(
+			this.app,
+			contextMenuFolderPath,
+			{
+				createInObsidianAttachmentFolder:
+					this.settings.createInObsidianAttachmentFolder,
+				customFolderForNewFiles: this.settings.customFolderForNewFiles,
+			}
+		);
+		const path = await createDashboardFile(
+			this.app,
+			folderPath,
+			this.manifest.version
+		);
 
-		await app.workspace.getLeaf(true).setViewState({
+		await this.app.workspace.getLeaf(true).setViewState({
 			type: DASHBOARDS_VIEW,
 			active: true,
 			state: { file: path },

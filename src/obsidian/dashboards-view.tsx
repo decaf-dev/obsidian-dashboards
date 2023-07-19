@@ -1,4 +1,4 @@
-import { TextFileView, WorkspaceLeaf } from "obsidian";
+import { App, TextFileView, WorkspaceLeaf } from "obsidian";
 import { AppState } from "src/shared/state/types";
 import { createRoot, Root } from "react-dom/client";
 import { v4 as uuidv4 } from "uuid";
@@ -15,27 +15,30 @@ import { createAppState } from "src/shared/state/state-factory";
 
 export default class DashboardsView extends TextFileView {
 	private root: Root | null;
-	private appId: string;
+	private reactAppId: string;
 	private pluginVersion: string;
 
+	app: App;
 	data: string;
 
-	constructor(leaf: WorkspaceLeaf, pluginVersion: string) {
+	constructor(app: App, leaf: WorkspaceLeaf, pluginVersion: string) {
 		super(leaf);
 		this.root = null;
 		this.data = "";
-		this.appId = uuidv4();
+		this.reactAppId = uuidv4();
+		this.app = app;
 		this.pluginVersion = pluginVersion;
 	}
 
 	async onOpen() {
-		//This is the view content container
-
 		this.addAction("eye-off", "Hide option bar", () => {
-			app.workspace.trigger(EVENT_OPTION_BAR_TOGGLE, this.appId);
+			this.app.workspace.trigger(
+				EVENT_OPTION_BAR_TOGGLE,
+				this.reactAppId
+			);
 		});
 		this.addAction("maximize", "Toggle border", () => {
-			app.workspace.trigger(EVENT_BORDER_TOGGLE, this.appId);
+			this.app.workspace.trigger(EVENT_BORDER_TOGGLE, this.reactAppId);
 		});
 		this.addAction("layout-grid", "Rearrange grid", () => {
 			new LayoutModal(this.app, this.data, (value) =>
@@ -95,7 +98,8 @@ export default class DashboardsView extends TextFileView {
 		if (this.root) {
 			this.root.render(
 				<Main
-					appId={this.appId}
+					app={this.app}
+					reactAppId={this.reactAppId}
 					leaf={this.leaf}
 					initialState={state}
 					onStateChange={(value) =>

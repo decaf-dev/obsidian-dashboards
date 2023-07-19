@@ -1,15 +1,16 @@
-import { WorkspaceLeaf } from "obsidian";
+import { App, WorkspaceLeaf } from "obsidian";
 import React from "react";
 import { appendOrReplaceFirstChild, renderMarkdown } from "./render-utils";
 import { css } from "@emotion/react";
 
 interface Props {
+	app: App;
 	leaf: WorkspaceLeaf;
 	markdown: string;
 	gridY: number;
 }
 
-const RenderMarkdown = React.memo(({ leaf, markdown, gridY }: Props) => {
+const RenderMarkdown = React.memo(({ app, leaf, markdown, gridY }: Props) => {
 	return (
 		<div
 			css={css`
@@ -17,7 +18,7 @@ const RenderMarkdown = React.memo(({ leaf, markdown, gridY }: Props) => {
 				height: 100%;
 			`}
 			ref={async (node) => {
-				const markdownEl = await renderMarkdown(leaf, markdown);
+				const markdownEl = await renderMarkdown(app, leaf, markdown);
 
 				const containerEl = leaf.view.containerEl.querySelector(
 					".view-content"

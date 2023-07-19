@@ -1,4 +1,4 @@
-import { Notice } from "obsidian";
+import { App, Notice } from "obsidian";
 import { createFile } from "./file-operations";
 import { createFolderIfNotExists } from "./folder-operations";
 import { serializeAppState } from "./serialize";
@@ -10,14 +10,18 @@ import { getNewDashboardFilePath } from "./dashboard-file-utils";
  * @param folderPath The path to the folder where the dashboard file should be created
  * @returns
  */
-export const createDashboardFile = async (folderPath: string) => {
+export const createDashboardFile = async (
+	app: App,
+	folderPath: string,
+	pluginVersion: string
+) => {
 	try {
-		await createFolderIfNotExists(folderPath);
+		await createFolderIfNotExists(app, folderPath);
 
-		const state = createAppState();
+		const state = createAppState(pluginVersion);
 		const serialized = serializeAppState(state);
 		const filePath = getNewDashboardFilePath(folderPath);
-		return await createFile(filePath, serialized);
+		return await createFile(app, filePath, serialized);
 	} catch (err) {
 		new Notice("Could not create dashboard file");
 		throw err;

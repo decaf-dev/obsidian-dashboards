@@ -1,3 +1,4 @@
+import { App } from "obsidian";
 import { normalize } from "path";
 
 /**
@@ -6,6 +7,7 @@ import { normalize } from "path";
  * @param options Options that determine where the dashboard file should be created.
  */
 export const findDashboardFolderPath = (
+	app: App,
 	contextMenuFolderPath: string | null,
 	options: {
 		createInObsidianAttachmentFolder: boolean;

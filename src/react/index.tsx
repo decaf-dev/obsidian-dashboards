@@ -1,25 +1,30 @@
-import { WorkspaceLeaf } from "obsidian";
+import { App, WorkspaceLeaf } from "obsidian";
 
-import App from "./app";
+import DashboardsApp from "./dashboards-app";
 import { AppState } from "src/shared/state/types";
 import MountProvider from "./mount-provider";
 
 interface Props {
-	appId: string;
+	app: App;
+	reactAppId: string;
 	leaf: WorkspaceLeaf;
 	initialState: AppState;
 	onStateChange: (value: AppState) => void;
 }
 
 export default function Main({
-	appId,
+	app,
+	reactAppId,
 	leaf,
 	initialState,
 	onStateChange,
 }: Props) {
 	return (
-		<MountProvider leaf={leaf} appId={appId}>
-			<App initialState={initialState} onStateChange={onStateChange} />
+		<MountProvider leaf={leaf} reactAppId={reactAppId} app={app}>
+			<DashboardsApp
+				initialState={initialState}
+				onStateChange={onStateChange}
+			/>
 		</MountProvider>
 	);
 }
