@@ -1,11 +1,13 @@
-import { Plugin, TFolder } from "obsidian";
-import { DASHBOARD_FILE_EXTENSION } from "./data/constants";
-import { DASHBOARDS_VIEW } from "./shared/constants";
+import { Plugin, TFolder, normalizePath } from "obsidian";
+import {
+	CURRENT_PLUGIN_VERSION,
+	DASHBOARDS_VIEW,
+	DASHBOARD_FILE_EXTENSION,
+} from "./data/constants";
 import DashboardsView from "./obsidian/dashboards-view";
-import { createDashboardFile } from "./data/dashboard-file-operations";
-import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab.ts";
+import { createDashboardFile } from "./data/dashboard-file";
+import DashboadsSettingsTab from "./obsidian/dashboards-settings-tab";
 import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "./shared/constants";
-import { findDashboardFolderPath } from "./data/dashboard-folder-utils";
 
 interface DashboardsSettings {
 	createInObsidianAttachmentFolder: boolean;
@@ -16,7 +18,7 @@ interface DashboardsSettings {
 const DEFAULT_SETTINGS: DashboardsSettings = {
 	createInObsidianAttachmentFolder: false,
 	customFolderForNewFiles: "",
-	pluginVersion: "",
+	pluginVersion: CURRENT_PLUGIN_VERSION,
 };
 
 export default class DashboardsPlugin extends Plugin {
@@ -25,25 +27,17 @@ export default class DashboardsPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		this.registerView(
-			DASHBOARDS_VIEW,
-			(leaf) => new DashboardsView(this.app, leaf, this.manifest.version)
-		);
+		this.registerView(DASHBOARDS_VIEW, (leaf) => new DashboardsView(leaf));
 		this.registerExtensions([DASHBOARD_FILE_EXTENSION], DASHBOARDS_VIEW);
 
 		this.addRibbonIcon("gauge", "Create new dashboard", async () => {
-			await this.handleCreateDashboardFile(null);
+			await this.handleCreateDashboardFile();
 		});
 
 		this.registerEvents();
 		this.registerCommands();
 
 		this.addSettingTab(new DashboadsSettingsTab(this.app, this));
-
-		if (this.settings.pluginVersion !== this.manifest.version) {
-			this.settings.pluginVersion = this.manifest.version;
-			await this.saveSettings();
-		}
 	}
 
 	onunload() {}
@@ -77,49 +71,46 @@ export default class DashboardsPlugin extends Plugin {
 
 		this.registerDomEvent(document, "keydown", (event) => {
 			if (event.metaKey || event.ctrlKey) {
-				this.app.workspace.trigger(EVENT_CTRL_DOWN, event);
+				app.workspace.trigger(EVENT_CTRL_DOWN, event);
 			}
 		});
 
 		this.registerDomEvent(document, "keyup", (event) => {
 			if (!event.metaKey && !event.ctrlKey) {
-				this.app.workspace.trigger(EVENT_CTRL_UP, event);
+				app.workspace.trigger(EVENT_CTRL_UP, event);
 			}
 		});
 	}
 
 	private registerCommands() {
 		this.addCommand({
-			id: "create",
+			id: "databoards-create",
 			name: "Create dashboard",
 			callback: async () => {
-				await this.handleCreateDashboardFile(null);
+				await this.handleCreateDashboardFile();
 			},
 		});
 	}
 
-	private async handleCreateDashboardFile(
-		contextMenuFolderPath: string | null
-	) {
-		const folderPath = findDashboardFolderPath(
-			this.app,
-			contextMenuFolderPath,
-			{
-				createInObsidianAttachmentFolder:
-					this.settings.createInObsidianAttachmentFolder,
-				customFolderForNewFiles: this.settings.customFolderForNewFiles,
-			}
-		);
-		const path = await createDashboardFile(
-			this.app,
-			folderPath,
-			this.manifest.version
-		);
+	private handleCreateDashboardFile(contextMenuFolderPath?: string) {
+		const folderPath = this.findDashboardFolderPath(contextMenuFolderPath);
+		createDashboardFile(folderPath);
+	}
 
-		await this.app.workspace.getLeaf(true).setViewState({
-			type: DASHBOARDS_VIEW,
-			active: true,
-			state: { file: path },
-		});
+	private findDashboardFolderPath(contextMenuFolderPath?: string) {
+		let folderPath = "/";
+
+		if (contextMenuFolderPath) {
+			folderPath = contextMenuFolderPath;
+		} else if (this.settings.createInObsidianAttachmentFolder) {
+			folderPath = (this.app.vault as any).getConfig(
+				"attachmentFolderPath"
+			);
+		} else {
+			folderPath = this.settings.customFolderForNewFiles;
+		}
+		const normalized = normalizePath(folderPath);
+		if (normalized === ".") return "/";
+		return normalized;
 	}
 }

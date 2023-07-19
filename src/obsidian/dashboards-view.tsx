@@ -1,50 +1,28 @@
-import { App, TextFileView, WorkspaceLeaf } from "obsidian";
-import { AppState } from "src/shared/state/types";
+import { TextFileView, WorkspaceLeaf } from "obsidian";
+import { AppState } from "src/shared/types";
 import { createRoot, Root } from "react-dom/client";
-import { v4 as uuidv4 } from "uuid";
-
-import { deserializeAppState, serializeAppState } from "src/data/serialize";
 import {
-	DASHBOARDS_VIEW,
-	EVENT_BORDER_TOGGLE,
-	EVENT_OPTION_BAR_TOGGLE,
-} from "src/shared/constants";
+	deserializeAppState,
+	serializeAppState,
+} from "src/data/serialize-app-state";
+import { DASHBOARDS_VIEW } from "src/data/constants";
 import Main from "src/react";
-import LayoutModal from "./layout-modal";
-import { createAppState } from "src/shared/state/state-factory";
 
 export default class DashboardsView extends TextFileView {
 	private root: Root | null;
-	private reactAppId: string;
-	private pluginVersion: string;
 
-	app: App;
 	data: string;
 
-	constructor(app: App, leaf: WorkspaceLeaf, pluginVersion: string) {
+	constructor(leaf: WorkspaceLeaf) {
 		super(leaf);
 		this.root = null;
 		this.data = "";
-		this.reactAppId = uuidv4();
-		this.app = app;
-		this.pluginVersion = pluginVersion;
 	}
 
 	async onOpen() {
-		this.addAction("eye-off", "Hide option bar", () => {
-			this.app.workspace.trigger(
-				EVENT_OPTION_BAR_TOGGLE,
-				this.reactAppId
-			);
-		});
-		this.addAction("maximize", "Toggle border", () => {
-			this.app.workspace.trigger(EVENT_BORDER_TOGGLE, this.reactAppId);
-		});
-		this.addAction("layout-grid", "Rearrange grid", () => {
-			new LayoutModal(this.app, this.data, (value) =>
-				this.handleSaveState(value, true)
-			).open();
-		});
+		//This is the view content container
+		const container = this.containerEl.children[1];
+		this.root = createRoot(container);
 	}
 
 	async onClose() {
@@ -57,19 +35,19 @@ export default class DashboardsView extends TextFileView {
 	setViewData(data: string, clear: boolean): void {
 		this.data = data;
 
+		const state = deserializeAppState(data);
 		if (clear) {
 			//We need to set this in a timeout to prevent errors from React
 			setTimeout(() => {
 				if (this.root) {
 					this.root.unmount();
+					const container = this.containerEl.children[1];
+					this.root = createRoot(container);
+					this.renderApp(state);
 				}
-				const container = this.containerEl.children[1];
-				this.root = createRoot(container);
-
-				const defaultState = createAppState(this.pluginVersion);
-				const state = deserializeAppState(data, { defaultState });
-				this.renderApp(state);
 			}, 0);
+		} else {
+			this.renderApp(state);
 		}
 	}
 
@@ -98,21 +76,18 @@ export default class DashboardsView extends TextFileView {
 		if (this.root) {
 			this.root.render(
 				<Main
-					app={this.app}
-					reactAppId={this.reactAppId}
 					leaf={this.leaf}
 					initialState={state}
-					onStateChange={(value) =>
-						this.handleSaveState(value, false)
-					}
+					onStateChange={this.handleSaveLoomState}
 				/>
 			);
 		}
 	}
 
-	private handleSaveState = (state: AppState, isExternal: boolean) => {
+	private handleSaveLoomState = (state: AppState) => {
 		const serialized = serializeAppState(state);
-		this.setViewData(serialized, isExternal);
+		this.data = serialized;
+
 		//Request a save - every 2s
 		this.requestSave();
 	};

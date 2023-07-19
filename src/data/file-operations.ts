@@ -1,39 +1,26 @@
-import { App } from "obsidian";
-import { splitAtFileExtension } from "./file-utils";
+import { splitFileExtension } from "./file-utils";
 
-const getFilePathWithIteration = (
-	path: string,
-	extension: string,
-	numExisting: number
-) => {
-	const numIterations = numExisting > 0 ? " " + numExisting : "";
-	const filePathWithIteration = path + numIterations + extension;
-	return filePathWithIteration;
+export const createFolderIfNotExists = async (
+	folderPath: string
+): Promise<void> => {
+	if (app.vault.getAbstractFileByPath(folderPath) == null)
+		return await app.vault.createFolder(folderPath);
+	return Promise.resolve();
 };
 
-/**
- * Creates a new file with the specified data. If a file with the same name already exists, it will append a number to the end of the file name
- * @param filePath The path to the file
- * @param data The data to write to the file
- * @param numExisting The number of existing files with the same name
- * @returns
- */
 export const createFile = async (
-	app: App,
 	filePath: string,
 	data: string,
 	numExisting = 0
 ): Promise<string> => {
 	try {
-		const split = splitAtFileExtension(filePath);
-		if (split == null)
+		const filePathExtension = splitFileExtension(filePath);
+		if (filePathExtension == null)
 			throw new SyntaxError("File must include an extension");
-		const { path, extension } = split;
-		const filePathWithIteration = getFilePathWithIteration(
-			path,
-			extension,
-			numExisting
-		);
+
+		const numIterations = numExisting > 0 ? " " + numExisting : "";
+		const filePathWithIteration =
+			filePathExtension[0] + numIterations + filePathExtension[1];
 
 		await app.vault.create(filePathWithIteration, data);
 		return filePathWithIteration;
@@ -41,7 +28,7 @@ export const createFile = async (
 		const error = err as Error;
 
 		if (error.message.includes("File already exists")) {
-			return createFile(app, filePath, data, numExisting + 1);
+			return createFile(filePath, data, numExisting + 1);
 		} else {
 			throw err;
 		}

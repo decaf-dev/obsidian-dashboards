@@ -27,6 +27,15 @@ body:
           description: What did you expect to happen?
       validations:
           required: true
+    - type: dropdown
+      id: mobile-app
+      attributes:
+          label: Are you using the mobile app?
+          options:
+              - "Yes"
+              - "No"
+      validations:
+          required: true
     - type: textarea
       id: debug-info
       attributes:

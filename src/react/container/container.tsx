@@ -1,19 +1,18 @@
 import { css } from "@emotion/react";
 
-import { Container, ContainerType } from "src/shared/state/types";
+import { Container, ContainerType } from "src/shared/types";
 import React from "react";
 import { EVENT_CTRL_DOWN, EVENT_CTRL_UP } from "src/shared/constants";
 import { TFile } from "obsidian";
 import ContainerContent from "./container-content";
 import EmptyContainerContent from "./empty-container-content";
-import { createContainer } from "src/shared/state/state-factory";
-import { useMountState } from "../mount-provider";
+import { createContainer } from "src/data/app-state-factory";
 
 interface Props {
 	container?: Container;
 	showBorders: boolean;
 	position: number;
-	gridY: number;
+	numContainersY: number;
 	onAddContainer: (value: Container) => void;
 	onRemoveContainer: (id: string) => void;
 }
@@ -22,11 +21,10 @@ export default function Container({
 	container,
 	position,
 	showBorders,
-	gridY,
+	numContainersY,
 	onAddContainer,
 	onRemoveContainer,
 }: Props) {
-	const { app } = useMountState();
 	const [isCtrlDown, setCtrlDown] = React.useState(false);
 	const [isHovered, setHovered] = React.useState(false);
 
@@ -80,7 +78,7 @@ export default function Container({
 		if (ref.current) {
 			setHeight(ref.current.clientHeight);
 		}
-	}, []);
+	}, [ref.current]);
 
 	return (
 		<div
@@ -112,7 +110,7 @@ export default function Container({
 					height={height}
 					isHovered={isHovered}
 					container={container}
-					gridY={gridY}
+					numContainersY={numContainersY}
 					onRemoveClick={() => onRemoveContainer(container.id)}
 				/>
 			)}
