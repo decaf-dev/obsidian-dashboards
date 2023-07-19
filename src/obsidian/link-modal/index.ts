@@ -1,5 +1,7 @@
 import { App, Modal } from "obsidian";
 
+import "./styles.css";
+
 type SaveCallback = (value: string) => void;
 
 export default class LinkModal extends Modal {
@@ -13,13 +15,10 @@ export default class LinkModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
-		contentEl.createEl("h4", { text: "Add link" });
+		contentEl.addClass("Dashboards__link-modal");
+		contentEl.createEl("h2", { text: "Add link" });
 
 		const containerEl = contentEl.createDiv();
-		containerEl.style.display = "flex";
-		containerEl.style.flexDirection = "column";
-		containerEl.style.gap = "var(--size-4-4)";
-
 		this.renderInputEl(containerEl);
 		this.renderButtonEl(containerEl);
 	}
@@ -29,10 +28,7 @@ export default class LinkModal extends Modal {
 	}
 
 	private renderInputEl(containerEl: HTMLElement) {
-		this.inputEl = containerEl.createEl("input");
-		this.inputEl.type = "text";
-		this.inputEl.style.padding = "var(--size-2-2) var(--size-4-2)";
-		this.inputEl.style.fontSize = "16px";
+		this.inputEl = containerEl.createEl("input", { type: "text" });
 		this.inputEl.focus();
 	}
 

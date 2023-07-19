@@ -1,28 +1,21 @@
-import { normalizePath } from "obsidian";
-import {
-	DASHBOARD_FILE_EXTENSION,
-	DEFAULT_DASHBOARD_FILE_NAME,
-	EXTENSION_REGEX,
-} from "./constants";
+import { EXTENSION_REGEX } from "./constants";
 
-export const splitFileExtension = (
+/**
+ * Splits the file path into the path and the extension.
+ * @param filePath The path to the file, including the filename and extension
+ */
+export const splitAtFileExtension = (
 	filePath: string
-): [string, string] | null => {
+): {
+	path: string;
+	extension: string;
+} | null => {
 	if (filePath.match(EXTENSION_REGEX)) {
 		const periodIndex = filePath.lastIndexOf(".");
-		return [
-			filePath.substring(0, periodIndex),
-			filePath.substring(periodIndex),
-		];
+		return {
+			path: filePath.substring(0, periodIndex),
+			extension: filePath.substring(periodIndex),
+		};
 	}
 	return null;
-};
-
-const getDefaultDashboardFileName = (): string => {
-	return DEFAULT_DASHBOARD_FILE_NAME + "." + DASHBOARD_FILE_EXTENSION;
-};
-
-export const getDashboardFilePath = (folderPath: string) => {
-	const fileName = getDefaultDashboardFileName();
-	return normalizePath(folderPath + "/" + fileName);
 };

@@ -1,21 +1,23 @@
 import { css } from "@emotion/react";
 import Container from "../container/container";
-import { Container as ContainerType } from "src/shared/types";
+import { Container as ContainerType } from "src/shared/state/types";
 
 interface Props {
 	showBorders: boolean;
+	borderSpacing: string;
 	data: ContainerType[];
-	numContainersX: number;
-	numContainersY: number;
+	gridX: number;
+	gridY: number;
 	onAddContainer: (value: ContainerType) => void;
 	onRemoveContainer: (id: string) => void;
 }
 
 export default function Table({
+	borderSpacing,
 	showBorders,
 	data,
-	numContainersX,
-	numContainersY,
+	gridX,
+	gridY,
 	onAddContainer,
 	onRemoveContainer,
 }: Props) {
@@ -24,19 +26,19 @@ export default function Table({
 			css={css`
 				width: 100%;
 				height: 100%;
-				border-spacing: 10px;
+				border-spacing: ${borderSpacing};
 			`}
 		>
 			<tbody>
-				{Array.from({ length: numContainersY }).map((_, y) => (
+				{Array.from({ length: gridY }).map((_, y) => (
 					<tr
 						key={y}
 						css={css`
-							height: ${100 / numContainersY}%;
+							height: ${100 / gridY}%;
 						`}
 					>
-						{Array.from({ length: numContainersX }).map((_, x) => {
-							const position = x + y * numContainersX;
+						{Array.from({ length: gridX }).map((_, x) => {
+							const position = x + y * gridX;
 							const container = data.find(
 								(container) => container.position === position
 							);
@@ -44,14 +46,15 @@ export default function Table({
 								<td
 									key={x}
 									css={css`
-										width: ${100 / numContainersX}%;
+										width: ${100 / gridX}%;
+										padding: 0;
 									`}
 								>
 									<Container
 										showBorders={showBorders}
 										container={container}
 										position={position}
-										numContainersY={numContainersY}
+										gridY={gridY}
 										onAddContainer={onAddContainer}
 										onRemoveContainer={onRemoveContainer}
 									/>

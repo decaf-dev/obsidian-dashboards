@@ -1,9 +1,10 @@
-import { MarkdownRenderer, WorkspaceLeaf } from "obsidian";
-import { DASHBOARDS_VIEW } from "src/data/constants";
+import { App, MarkdownRenderer, WorkspaceLeaf } from "obsidian";
+import { DASHBOARDS_VIEW } from "src/shared/constants";
 import DashboardsView from "src/obsidian/dashboards-view";
-import { ContainerType } from "src/shared/types";
+import { ContainerType } from "src/shared/state/types";
 
 export const getMarkdownFromContainerContent = (
+	app: App,
 	type: ContainerType,
 	content: string
 ) => {
@@ -44,7 +45,11 @@ export const appendOrReplaceFirstChild = (
 	}
 };
 
-export const renderMarkdown = async (leaf: WorkspaceLeaf, markdown: string) => {
+export const renderMarkdown = async (
+	app: App,
+	leaf: WorkspaceLeaf,
+	markdown: string
+) => {
 	const div = document.createElement("div");
 	div.style.height = "100%";
 	div.style.width = "100%";
@@ -62,7 +67,7 @@ export const renderMarkdown = async (leaf: WorkspaceLeaf, markdown: string) => {
 				view
 			);
 
-			watchForMutations(div, view);
+			watchForMutations(app, view, div);
 		} catch (e) {
 			console.error(e);
 		}
@@ -89,14 +94,15 @@ const handleLinkClick = (event: MouseEvent) => {
 	}
 };
 
-const watchForMutations = (el: HTMLElement, view: DashboardsView) => {
+const watchForMutations = (app: App, view: DashboardsView, el: HTMLElement) => {
+	//TODO clean up
 	const observer = new MutationObserver(function () {
 		// // Handle the mutations here
 		// mutationsList.forEach(function (mutation) {
 		// 	console.log("Mutation type:", mutation.type);
 		// 	console.log("Modified element:", mutation.target);
 		// });
-		checkForEmbeddedLinks(el, view);
+		checkForEmbeddedLinks(app, view, el);
 	});
 
 	// Configuration options for the observer (e.g., what types of mutations to observe)
@@ -106,7 +112,11 @@ const watchForMutations = (el: HTMLElement, view: DashboardsView) => {
 	observer.observe(el, config);
 };
 
-const checkForEmbeddedLinks = (el: HTMLElement, view: DashboardsView) => {
+const checkForEmbeddedLinks = (
+	app: App,
+	view: DashboardsView,
+	el: HTMLElement
+) => {
 	const embeds = el.querySelectorAll(".internal-link");
 	embeds.forEach((embed) => {
 		const el = embed as HTMLAnchorElement;

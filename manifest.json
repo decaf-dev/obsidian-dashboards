@@ -1,7 +1,7 @@
 {
 	"id": "dashboards",
 	"name": "Dashboards",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"minAppVersion": "1.2.0",
 	"description": "Create your own personalized dashboard using customizable grid views",
 	"author": "Trey Wallis",
