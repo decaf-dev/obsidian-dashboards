@@ -1,8 +1,5 @@
 import { normalizePath } from "obsidian";
-import {
-	DASHBOARD_FILE_EXTENSION,
-	NEW_DASHBOARD_FILE_NAME,
-} from "./constants-file";
+import { DASHBOARD_FILE_EXTENSION, NEW_DASHBOARD_FILE_NAME } from "./constants";
 
 /**
  * Returns the default dashboard file name with the file extension.

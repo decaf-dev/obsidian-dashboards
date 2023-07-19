@@ -1,6 +1,5 @@
 import { Plugin, TFolder } from "obsidian";
-import { DASHBOARD_FILE_EXTENSION } from "./data/constants-file";
-import { CURRENT_PLUGIN_VERSION } from "./data/constants-obsidian";
+import { DASHBOARD_FILE_EXTENSION } from "./data/constants";
 import { DASHBOARDS_VIEW } from "./shared/constants";
 import DashboardsView from "./obsidian/dashboards-view";
 import { createDashboardFile } from "./data/dashboard-file-operations";
@@ -17,7 +16,7 @@ interface DashboardsSettings {
 const DEFAULT_SETTINGS: DashboardsSettings = {
 	createInObsidianAttachmentFolder: false,
 	customFolderForNewFiles: "",
-	pluginVersion: CURRENT_PLUGIN_VERSION,
+	pluginVersion: "",
 };
 
 export default class DashboardsPlugin extends Plugin {
@@ -26,7 +25,10 @@ export default class DashboardsPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		this.registerView(DASHBOARDS_VIEW, (leaf) => new DashboardsView(leaf));
+		this.registerView(
+			DASHBOARDS_VIEW,
+			(leaf) => new DashboardsView(leaf, this.manifest.version)
+		);
 		this.registerExtensions([DASHBOARD_FILE_EXTENSION], DASHBOARDS_VIEW);
 
 		this.addRibbonIcon("gauge", "Create new dashboard", async () => {
@@ -37,6 +39,11 @@ export default class DashboardsPlugin extends Plugin {
 		this.registerCommands();
 
 		this.addSettingTab(new DashboadsSettingsTab(this.app, this));
+
+		if (this.settings.pluginVersion !== this.manifest.version) {
+			this.settings.pluginVersion = this.manifest.version;
+			await this.saveSettings();
+		}
 	}
 
 	onunload() {}

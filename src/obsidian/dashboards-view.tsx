@@ -11,18 +11,21 @@ import {
 } from "src/shared/constants";
 import Main from "src/react";
 import LayoutModal from "./modal/layout-modal";
+import { createAppState } from "src/shared/state/state-factory";
 
 export default class DashboardsView extends TextFileView {
 	private root: Root | null;
 	private appId: string;
+	private pluginVersion: string;
 
 	data: string;
 
-	constructor(leaf: WorkspaceLeaf) {
+	constructor(leaf: WorkspaceLeaf, pluginVersion: string) {
 		super(leaf);
 		this.root = null;
 		this.data = "";
 		this.appId = uuidv4();
+		this.pluginVersion = pluginVersion;
 	}
 
 	async onOpen() {
@@ -60,7 +63,8 @@ export default class DashboardsView extends TextFileView {
 				const container = this.containerEl.children[1];
 				this.root = createRoot(container);
 
-				const state = deserializeAppState(data);
+				const defaultState = createAppState(this.pluginVersion);
+				const state = deserializeAppState(data, { defaultState });
 				this.renderApp(state);
 			}, 0);
 		}
