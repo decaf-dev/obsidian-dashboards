@@ -1,13 +1,12 @@
-import { CURRENT_PLUGIN_VERSION } from "../../data/constants-obsidian";
 import { AppState, Container, ContainerType, LayoutOptions } from "./types";
 import { v4 as uuid } from "uuid";
 
 /**
  * Creates a new app state with the current plugin version
  */
-export const createAppState = (): AppState => {
+export const createAppState = (pluginVersion: string): AppState => {
 	return {
-		pluginVersion: CURRENT_PLUGIN_VERSION,
+		pluginVersion,
 		layout: LayoutOptions.TWO_BY_TWO,
 		data: [],
 		showBorders: true,

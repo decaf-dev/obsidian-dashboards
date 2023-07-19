@@ -7,6 +7,7 @@ import { TFile } from "obsidian";
 import ContainerContent from "./container-content";
 import EmptyContainerContent from "./empty-container-content";
 import { createContainer } from "src/shared/state/state-factory";
+import { useMountState } from "../mount-provider";
 
 interface Props {
 	container?: Container;
@@ -25,6 +26,7 @@ export default function Container({
 	onAddContainer,
 	onRemoveContainer,
 }: Props) {
+	const { app } = useMountState();
 	const [isCtrlDown, setCtrlDown] = React.useState(false);
 	const [isHovered, setHovered] = React.useState(false);
 

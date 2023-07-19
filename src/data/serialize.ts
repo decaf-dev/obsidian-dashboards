@@ -1,19 +1,28 @@
 import { AppState } from "src/shared/state/types";
-import { CURRENT_PLUGIN_VERSION } from "./constants-obsidian";
-import { createAppState } from "../shared/state/state-factory";
-import { combineObjects } from "./serialize-utils";
+import { combineStateObjects } from "./serialize-utils";
 
 /**
  * Deserializes the app state from JSON
  * @param data The data loaded from the dashboard file
  */
-export const deserializeAppState = (data: string) => {
+export const deserializeAppState = (
+	data: string,
+	options?: {
+		defaultState: AppState;
+	}
+) => {
 	const parsedState = JSON.parse(data);
-	parsedState.pluginVersion = CURRENT_PLUGIN_VERSION;
+	const { defaultState } = options ?? {};
 
-	const defaultState = createAppState();
-	const updatedState = combineObjects(defaultState, parsedState) as AppState;
-	return updatedState;
+	if (defaultState !== undefined) {
+		const updatedState = combineStateObjects(
+			defaultState,
+			parsedState
+		) as AppState;
+		return updatedState;
+	}
+
+	return parsedState;
 };
 
 /**

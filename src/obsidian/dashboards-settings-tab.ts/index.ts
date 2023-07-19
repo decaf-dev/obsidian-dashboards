@@ -1,5 +1,7 @@
-import { PluginSettingTab, App, Setting, setIcon } from "obsidian";
+import { PluginSettingTab, App, Setting } from "obsidian";
 import DashboardsPlugin from "src/main";
+
+import "./styles.css";
 
 export default class DashboadsSettingsTab extends PluginSettingTab {
 	plugin: DashboardsPlugin;
@@ -21,13 +23,19 @@ export default class DashboadsSettingsTab extends PluginSettingTab {
 
 		//Attachments folder
 		const attachmentsFolderDesc = new DocumentFragment();
-		attachmentsFolderDesc.createSpan({}, (span) => {
-			span.innerHTML =
-				// eslint-disable-next-line quotes
-				'Create dashboards in the attachments folder defined in the Obsidian settings.<br><br>This can be changed in <span style="color: var(--text-accent);">Files & Links -> Default location for new attachments</span><br><br>Otherwise, the folder location below will be used.';
+		attachmentsFolderDesc.createDiv({
+			text: "Create dashboards in the attachments folder defined in the Obsidian settings.",
+		});
+		attachmentsFolderDesc.createDiv({
+			text: "Files & Links -> Default location for new attachments",
+			cls: "Dashboards__setting-emphasize",
+		});
+		attachmentsFolderDesc.createEl("br");
+		attachmentsFolderDesc.createDiv({
+			text: "Otherwise, the folder location below will be used",
 		});
 
-		const setting = new Setting(containerEl)
+		new Setting(containerEl)
 			.setName("Create in attachments folder")
 			.setDesc(attachmentsFolderDesc)
 			.addToggle((cb) => {
@@ -40,16 +48,11 @@ export default class DashboadsSettingsTab extends PluginSettingTab {
 					this.display();
 				});
 			});
-		const settingContainerEl = setting.controlEl;
-		const div = document.createElement("div");
-		setIcon(div, "lock");
-		settingContainerEl.insertBefore(div, settingContainerEl.firstChild);
 
 		//Folder location
 		const defaultLocationDesc = new DocumentFragment();
-		defaultLocationDesc.createSpan({}, (span) => {
-			span.innerHTML =
-				"Where newly created dashboards are placed. Default location is the vault root folder, if not specified.";
+		defaultLocationDesc.createSpan({
+			text: "Where newly created dashboards are placed. Default location is the vault root folder, if not specified.",
 		});
 
 		if (this.plugin.settings.createInObsidianAttachmentFolder === false) {

@@ -1,4 +1,4 @@
-import { EXTENSION_REGEX } from "./constants-file";
+import { EXTENSION_REGEX } from "./constants";
 
 /**
  * Splits the file path into the path and the extension.

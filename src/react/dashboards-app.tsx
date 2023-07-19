@@ -17,9 +17,9 @@ interface Props {
 	onStateChange: (state: AppState) => void;
 }
 
-export default function App({ initialState, onStateChange }: Props) {
+export default function DashboardsApp({ initialState, onStateChange }: Props) {
 	const [state, setState] = React.useState(initialState);
-	const { appId } = useMountState();
+	const { reactAppId, app } = useMountState();
 
 	React.useEffect(() => {
 		onStateChange(state);
@@ -31,7 +31,7 @@ export default function App({ initialState, onStateChange }: Props) {
 
 	React.useEffect(() => {
 		function handleOptionBarToggle(eventAppId: string) {
-			if (appId === eventAppId) {
+			if (reactAppId === eventAppId) {
 				setState((prevState) => {
 					return {
 						...prevState,
@@ -45,11 +45,11 @@ export default function App({ initialState, onStateChange }: Props) {
 		return () => {
 			app.workspace.off(EVENT_OPTION_BAR_TOGGLE, handleOptionBarToggle);
 		};
-	}, [appId]);
+	}, [reactAppId]);
 
 	React.useEffect(() => {
 		function handleBorderToggle(eventAppId: string) {
-			if (appId === eventAppId) {
+			if (reactAppId === eventAppId) {
 				setState((prevState) => {
 					return {
 						...prevState,
@@ -63,7 +63,7 @@ export default function App({ initialState, onStateChange }: Props) {
 		return () => {
 			app.workspace.off(EVENT_BORDER_TOGGLE, handleBorderToggle);
 		};
-	}, [appId]);
+	}, [reactAppId]);
 
 	return (
 		<div

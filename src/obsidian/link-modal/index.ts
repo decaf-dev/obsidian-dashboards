@@ -1,9 +1,11 @@
 import { App, Modal } from "obsidian";
 
+import "./styles.css";
+
 type SaveCallback = (value: string) => void;
 
-export default class CodeBlockModal extends Modal {
-	inputEl?: HTMLTextAreaElement;
+export default class LinkModal extends Modal {
+	inputEl?: HTMLInputElement;
 	onSave: SaveCallback;
 
 	constructor(app: App, onSave: SaveCallback) {
@@ -13,13 +15,10 @@ export default class CodeBlockModal extends Modal {
 
 	onOpen(): void {
 		const { contentEl } = this;
-		contentEl.createEl("h2", { text: "Add code block" });
+		contentEl.addClass("Dashboards__link-modal");
+		contentEl.createEl("h2", { text: "Add link" });
 
 		const containerEl = contentEl.createDiv();
-		containerEl.style.display = "flex";
-		containerEl.style.flexDirection = "column";
-		containerEl.style.gap = "var(--size-4-4)";
-
 		this.renderInputEl(containerEl);
 		this.renderButtonEl(containerEl);
 	}
@@ -29,9 +28,7 @@ export default class CodeBlockModal extends Modal {
 	}
 
 	private renderInputEl(containerEl: HTMLElement) {
-		this.inputEl = containerEl.createEl("textarea");
-		this.inputEl.style.height = "150px";
-		this.inputEl.style.resize = "none";
+		this.inputEl = containerEl.createEl("input", { type: "text" });
 		this.inputEl.focus();
 	}
 
