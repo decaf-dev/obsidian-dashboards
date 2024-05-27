@@ -5,7 +5,7 @@
 	"minAppVersion": "1.2.0",
 	"description": "Create your own personalized dashboard using customizable grid views",
 	"author": "Trey Wallis",
-	"authorUrl": "https://github.com/trey-wallis",
+	"authorUrl": "https://github.com/decaf-dev",
 	"isDesktopOnly": true,
-	"fundingUrl": "https://www.buymeacoffee.com/treywallis"
+	"fundingUrl": "https://www.buymeacoffee.com/decaf_dev"
 }

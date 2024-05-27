@@ -4,12 +4,7 @@
 
 Dashboards is an [Obsidian.md](https://obsidian.md/) plugin. Design your own personalized dashboard or home page. Dashboards offers flexible grid configurations, allowing you to choose from various layouts such as 1x2, 2x2, 3x3, and more. Each grid contains containers where you can embed different elements, including vault files, code blocks, or external urls.
 
-If you are looking for the plugin that was formally called `Dashboards` please see [DataLoom](https://github.com/trey-wallis/obsidian-dataloom)
-
-Support development
-
-<a href="https://buymeacoffee.com/treywallis" target="_blank" rel="noopener">
-<img width="180px" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&amp;emoji=&amp;slug=treywallis&amp;button_colour=6a8695&amp;font_colour=ffffff&amp;font_family=Poppins&amp;outline_colour=000000&amp;coffee_colour=FFDD00" referrerpolicy="no-referrer" alt="?text=Buy me a coffee&amp;emoji=&amp;slug=treywallis&amp;button_colour=6a8695&amp;font_colour=ffffff&amp;font_family=Poppins&amp;outline_colour=000000&amp;coffee_colour=FFDD00"></a>
+If you are looking for the plugin that was formally called `Dashboards` please see [DataLoom](https://github.com/decaf-dev/obsidian-dataloom)
 
 ## About
 
@@ -58,4 +53,4 @@ Any website will automatically be embedded in an iFrame
 
 ## License
 
-Dashboards is distributed under the [MIT License](https://github.com/trey-wallis/obsidian-dashboards/blob/master/LICENSE)
+Dashboards is distributed under the [MIT License](https://github.com/decaf-dev/obsidian-dashboards/blob/master/LICENSE)
