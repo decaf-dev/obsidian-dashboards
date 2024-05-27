@@ -1,7 +1,5 @@
 ![](./docs/assets/cover.png)
 
-![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22dashboards%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
-
 Dashboards is an [Obsidian.md](https://obsidian.md/) plugin. Design your own personalized dashboard or home page. Dashboards offers flexible grid configurations, allowing you to choose from various layouts such as 1x2, 2x2, 3x3, and more. Each grid contains containers where you can embed different elements, including vault files, code blocks, or external urls.
 
 If you are looking for the plugin that was formally called `Dashboards` please see [DataLoom](https://github.com/decaf-dev/obsidian-dataloom)
